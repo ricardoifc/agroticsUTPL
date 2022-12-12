@@ -1,3 +1,4 @@
+import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
@@ -44,6 +45,7 @@ class _EditarSiembrasState extends State<EditarSiembras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("EDITAR"),
       ),

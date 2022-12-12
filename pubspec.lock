@@ -76,6 +76,13 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
+  flutter_barcode_scanner:
+    dependency: "direct main"
+    description:
+      name: flutter_barcode_scanner
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.0"
   flutter_lints:
     dependency: "direct dev"
     description:
@@ -83,6 +90,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  flutter_plugin_android_lifecycle:
+    dependency: transitive
+    description:
+      name: flutter_plugin_android_lifecycle
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "2.0.7"
   flutter_test:
     dependency: "direct dev"
     description: flutter
@@ -233,15 +247,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0"
-  qr_code_scanner:
-    dependency: "direct main"
-    description:
-      path: "."
-      ref: flutter-beta
-      resolved-ref: "5c8a34b848e4e1bad6b4c987d89634b90fd3ab9e"
-      url: "https://github.com/X-SLAYER/qr_code_scanner.git"
-    source: git
-    version: "0.7.0"
   qr_flutter:
     dependency: "direct main"
     description:

@@ -15,10 +15,7 @@ dependencies:
   http: ^0.13.5
   share_plus: ^2.1.2
   path_provider:
-  qr_code_scanner:
-    git:
-      url: https://github.com/X-SLAYER/qr_code_scanner.git
-      ref: flutter-beta
+  flutter_barcode_scanner: ^2.0.0
 
 
 

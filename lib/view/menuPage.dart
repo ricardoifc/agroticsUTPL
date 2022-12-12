@@ -9,7 +9,6 @@ import 'package:agrotics/view/siembras/listarSiembras.dart';
 import 'package:agrotics/view/ubicaciones/listarUbicaciones.dart';
 import 'package:agrotics/view/usuarios/listarUsuario.dart';
 import 'package:flutter/material.dart';
-import 'especies/listarEspecies.dart';
 
 class MenuPage extends StatelessWidget {
   const MenuPage({required this.username, required this.rol});
@@ -36,6 +35,7 @@ class MenuPage extends StatelessWidget {
     double tamIcon = 60;
     double tamText = 14;
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text('Menu'),
         actions: <Widget>[

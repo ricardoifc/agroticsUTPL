@@ -69,6 +69,7 @@ class _RegistroSiembrasState extends State<RegistroSiembras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Adicionar Siembra"),
       ),

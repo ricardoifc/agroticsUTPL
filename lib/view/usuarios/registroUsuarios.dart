@@ -45,6 +45,7 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Adicionar Usuarios"),
       ),
@@ -107,11 +108,11 @@ class _RegistroUsuarioState extends State<RegistroUsuario> {
 
           ),
           child: Padding(
-            padding: EdgeInsets.only(left:140, right:140),
+            padding: EdgeInsets.only(left:112, right:112),
                   child: DropdownButton<String>(
                     value: controllerRol,
                     icon: Icon(Icons.keyboard_arrow_down),
-                    iconSize: 40,
+                    iconSize: 30,
                     elevation: 16,
                     style: TextStyle(color: Colors.black54, fontSize: 18.0 ),
                     underline: Container(

@@ -21,6 +21,7 @@ class _ListarHerramientas_logsState extends State<ListarHerramientas_logs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Registro de herramientas"),
       ),

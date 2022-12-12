@@ -3,14 +3,20 @@ import 'package:agrotics/conexion.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
+import 'identificarAddMuestra.dart';
 
 class RegistroAddMuestras extends StatefulWidget {
+  final Data data;
+  RegistroAddMuestras({required this.data});
+
   @override
   _RegistroAddMuestrasState createState() => _RegistroAddMuestrasState();
 }
 
 class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
-  TextEditingController id_siembra = TextEditingController();
+
+  //late String id_siembra = "1000000";
+  //TextEditingController id_siembra = "1000000" as TextEditingController;
   TextEditingController fecha_muestreo = TextEditingController();
   TextEditingController altura = TextEditingController();
   TextEditingController diametro = TextEditingController();
@@ -50,8 +56,8 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
     var url = Uri.parse(conexion() + "muestras/adddatamuestras.php");
 
     http.post(url, body: {
-      'id_siembra': id_siembra.text,
-      'fecha_muestreo': fecha_muestreo.text,
+      'id_siembra': "1000000",
+      'fecha_muestreo': "05/12/2022",
       'altura': altura.text,
       'diametro': diametro.text,
       'nro_racimos': nro_racimos.text,
@@ -90,6 +96,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Agregar Muestra"),
       ),
@@ -102,27 +109,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
               Column(
                 children: <Widget>[
                   Container(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: id_siembra,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'identificador de siembra',
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: fecha_muestreo,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'fecha de muestreo',
-                      ),
-                    ),
-                  ),
-                  Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: altura,
                       decoration: const InputDecoration(
@@ -132,7 +119,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: diametro,
                       decoration: const InputDecoration(
@@ -142,7 +129,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nro_racimos,
                       decoration: const InputDecoration(
@@ -152,7 +139,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nro_flores_racimos,
                       decoration: const InputDecoration(
@@ -162,7 +149,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nro_flores_totales,
                       decoration: const InputDecoration(
@@ -172,7 +159,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nro_frutos_racimos,
                       decoration: const InputDecoration(
@@ -182,7 +169,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nro_frutos_totales,
                       decoration: const InputDecoration(
@@ -192,7 +179,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: longitud_fruto,
                       decoration: const InputDecoration(
@@ -202,7 +189,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: diametro_fruto,
                       decoration: const InputDecoration(
@@ -212,7 +199,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: peso_fruto,
                       decoration: const InputDecoration(
@@ -222,7 +209,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: produccion_planta,
                       decoration: const InputDecoration(
@@ -232,7 +219,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: ph_suelo,
                       decoration: const InputDecoration(
@@ -242,7 +229,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: mo,
                       decoration: const InputDecoration(
@@ -252,7 +239,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: nitrogeno,
                       decoration: const InputDecoration(
@@ -262,7 +249,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: fosforo,
                       decoration: const InputDecoration(
@@ -272,7 +259,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: potasio,
                       decoration: const InputDecoration(
@@ -282,7 +269,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: otros_elementos,
                       decoration: const InputDecoration(
@@ -292,7 +279,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: temperatura,
                       decoration: const InputDecoration(
@@ -302,7 +289,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: humedad_relativa,
                       decoration: const InputDecoration(
@@ -312,7 +299,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: riego_lluvia,
                       decoration: const InputDecoration(
@@ -322,7 +309,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: fertiliza_abono,
                       decoration: const InputDecoration(
@@ -332,7 +319,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: cantidad_fertiliza,
                       decoration: const InputDecoration(
@@ -342,7 +329,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: fechas_aplic_fertiliza,
                       decoration: const InputDecoration(
@@ -352,7 +339,7 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: control_plag_enferm,
                       decoration: const InputDecoration(
@@ -362,17 +349,17 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: cantidad_control_plag,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'Cantidad',
+                        labelText: 'cantidad control plagas',
                       ),
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: fecha_aplicacion,
                       decoration: const InputDecoration(
@@ -382,12 +369,12 @@ class _RegistroAddMuestrasState extends State<RegistroAddMuestras> {
                     ),
                   ),
                   Container(
-                    padding: const EdgeInsets.all(10),
+                    padding: const EdgeInsets.all(5),
                     child: TextField(
                       controller: observaciones,
                       decoration: const InputDecoration(
                         border: OutlineInputBorder(),
-                        labelText: 'fecha de aplicación ',
+                        labelText: 'Observaciónes ',
                       ),
                     ),
                   ),

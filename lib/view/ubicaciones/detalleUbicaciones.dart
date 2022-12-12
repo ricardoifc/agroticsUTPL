@@ -53,6 +53,7 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(title: Text("${widget.list[widget.index]['ubicacion']}")),
       body: Container(
         height: 700.0,

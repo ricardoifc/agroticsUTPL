@@ -21,6 +21,7 @@ class _ListarMuestrasState extends State<ListarMuestras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Muestras"),
       ),

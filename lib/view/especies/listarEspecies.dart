@@ -22,6 +22,7 @@ class _ListarEspecieState extends State<ListarEspecie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Especies"),
       ),

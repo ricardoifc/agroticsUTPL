@@ -23,6 +23,7 @@ class _ListarUsuarioState extends State<ListarUsuario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Usuarios"),
       ),

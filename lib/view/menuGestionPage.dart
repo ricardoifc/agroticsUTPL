@@ -1,5 +1,4 @@
 import 'package:agrotics/Util/global_color.dart';
-import 'package:agrotics/view/addmuestreos/identificarAddMuestra.dart';
 import 'package:agrotics/view/herramienta_logs/listarHerramienta_logs.dart';
 import 'package:agrotics/view/herramientas/listarHerramientas.dart';
 import 'package:agrotics/view/muestreos/listarMuestras.dart';
@@ -35,6 +34,7 @@ class MenuGestionPage extends StatelessWidget {
     double tamIcon = 60;
     double tamText = 14;
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text('Menu'),
         actions: <Widget>[
@@ -42,14 +42,14 @@ class MenuGestionPage extends StatelessWidget {
             icon: const Icon(Icons.settings),
             onPressed: () {},
           ),
-          IconButton(
+          /*IconButton(
             icon: const Icon(
               Icons.exit_to_app,
             ),
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/login');
             },
-          ),
+          ),*/
         ],
       ),
       //backgroundColor: Colors.grey,
@@ -59,13 +59,13 @@ class MenuGestionPage extends StatelessWidget {
           ),
           children: <Widget>[
             Visibility(
-              visible: isVisibleDocente,
+              visible: isVisibleAlumno,
               child: Container(
                 padding: const EdgeInsets.all(7.0),
                 child: RawMaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarUsuario()));
+                        builder: (BuildContext context) => ListarSiembras()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -77,25 +77,26 @@ class MenuGestionPage extends StatelessWidget {
                   child: Column(
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
+
+
                       ImageIcon(
 
-                        AssetImage('assets/icons/group.png'),
+                        AssetImage('assets/icons/siembra.png'),
                         color: GlobalColor.colorIconosPrincipal,
                         size: tamIcon,
                       ),
                       FittedBox(
-                        fit: BoxFit.scaleDown,
+                        fit: BoxFit.cover,
                         child:
                         Text(
-                          "Usuario",
+                          "Siembra",
                           style: TextStyle(fontSize: tamText),
                         ),),
-
                       FittedBox(
-                        fit: BoxFit.scaleDown,
+                        fit: BoxFit.cover,
                         child:
                         Text(
-                          "Listar Usuarios",
+                          "Listar Siembras",
                           style: TextStyle(fontSize: tamText),
                         ),
                       ),
@@ -104,6 +105,7 @@ class MenuGestionPage extends StatelessWidget {
                 ),
               ),
             ),
+
             Visibility(
               visible: isVisibleAlumno,
               child: Container(
@@ -197,100 +199,6 @@ class MenuGestionPage extends StatelessWidget {
                 ),
               ),
             ),
-
-            Visibility(
-              visible: isVisibleAlumno,
-              child: Container(
-                padding: const EdgeInsets.all(7.0),
-                child: RawMaterialButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarHerramientas()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  elevation: 2.0,
-                  fillColor: GlobalColor.colorCards,
-                  padding: const EdgeInsets.all(7.0),
-
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-                      ImageIcon(
-                        AssetImage('assets/icons/gardening-tools.png'),
-                        color: GlobalColor.colorIconosPrincipal,
-                        size: tamIcon,
-                      ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child:
-                        Text(
-                          "Herramientas",
-                          style: TextStyle(fontSize: tamText),
-                        ),),
-                FittedBox(
-                  fit: BoxFit.scaleDown,
-                  child:
-                  Text(
-                    "Listar Herramientas",
-                    style: TextStyle(fontSize: tamText),
-                  ),),
-
-                    ],
-                  ),
-                ),
-              ),
-            ),
-
-            Visibility(
-              visible: isVisibleAlumno,
-              child: Container(
-                padding: const EdgeInsets.all(7.0),
-                child: RawMaterialButton(
-                  onPressed: () {
-                    Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarHerramientas_logs()));
-                  },
-                  shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(15.0),
-                  ),
-                  elevation: 2.0,
-                  fillColor: GlobalColor.colorCards,
-                  padding: const EdgeInsets.all(7.0),
-
-                  child: Column(
-                    mainAxisSize: MainAxisSize.max,
-                    children: <Widget>[
-
-                      ImageIcon(
-
-                        AssetImage('assets/icons/registro_herramientas.png'),
-                        color: GlobalColor.colorIconosPrincipal,
-                        size: tamIcon,
-                      ),
-                      FittedBox(
-                        fit: BoxFit.scaleDown,
-                        child:
-                        Text(
-                          "Registros de\nherramientas",
-                          style: TextStyle(fontSize: tamText),
-                        ),),
-
-
-                      // Text(
-                      //   "",
-                      //   //maxLines: 1,
-                      //   style: TextStyle(
-                      //       color: GlobalColor.colorTextSecundario,
-                      //       fontFamily: 'ActoBold',
-                      //       fontSize: 14),
-                      // ),
-                    ],
-                  ),
-                ),
-              ),
-            ),
             Visibility(
               visible: isVisibleAlumno,
               child: Container(
@@ -338,14 +246,61 @@ class MenuGestionPage extends StatelessWidget {
                 ),
               ),
             ),
+
+
             Visibility(
-              visible: isVisibleAlumno,
+              visible: false,
               child: Container(
                 padding: const EdgeInsets.all(7.0),
                 child: RawMaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarSiembras()));
+                        builder: (BuildContext context) => ListarHerramientas()));
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 2.0,
+                  fillColor: GlobalColor.colorCards,
+                  padding: const EdgeInsets.all(7.0),
+
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      ImageIcon(
+                        AssetImage('assets/icons/gardening-tools.png'),
+                        color: GlobalColor.colorIconosPrincipal,
+                        size: tamIcon,
+                      ),
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child:
+                        Text(
+                          "Herramientas",
+                          style: TextStyle(fontSize: tamText),
+                        ),),
+                FittedBox(
+                  fit: BoxFit.scaleDown,
+                  child:
+                  Text(
+                    "Listar Herramientas",
+                    style: TextStyle(fontSize: tamText),
+                  ),),
+
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Visibility(
+              visible: false,
+              child: Container(
+                padding: const EdgeInsets.all(7.0),
+                child: RawMaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => ListarHerramientas_logs()));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),
@@ -358,25 +313,73 @@ class MenuGestionPage extends StatelessWidget {
                     mainAxisSize: MainAxisSize.max,
                     children: <Widget>[
 
-
                       ImageIcon(
 
-                        AssetImage('assets/icons/siembra.png'),
+                        AssetImage('assets/icons/registro_herramientas.png'),
                         color: GlobalColor.colorIconosPrincipal,
                         size: tamIcon,
                       ),
                       FittedBox(
-                        fit: BoxFit.cover,
+                        fit: BoxFit.scaleDown,
                         child:
                         Text(
-                          "Siembra",
+                          "Registros de\nherramientas",
                           style: TextStyle(fontSize: tamText),
                         ),),
+
+
+                      // Text(
+                      //   "",
+                      //   //maxLines: 1,
+                      //   style: TextStyle(
+                      //       color: GlobalColor.colorTextSecundario,
+                      //       fontFamily: 'ActoBold',
+                      //       fontSize: 14),
+                      // ),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+
+            Visibility(
+              visible: false,
+              child: Container(
+                padding: const EdgeInsets.all(7.0),
+                child: RawMaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => ListarUsuario()));
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 2.0,
+                  fillColor: GlobalColor.colorCards,
+                  padding: const EdgeInsets.all(7.0),
+
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      ImageIcon(
+
+                        AssetImage('assets/icons/group.png'),
+                        color: GlobalColor.colorIconosPrincipal,
+                        size: tamIcon,
+                      ),
                       FittedBox(
-                        fit: BoxFit.cover,
+                        fit: BoxFit.scaleDown,
                         child:
                         Text(
-                          "Listar Siembras",
+                          "Usuario",
+                          style: TextStyle(fontSize: tamText),
+                        ),),
+
+                      FittedBox(
+                        fit: BoxFit.scaleDown,
+                        child:
+                        Text(
+                          "Listar Usuarios",
                           style: TextStyle(fontSize: tamText),
                         ),
                       ),

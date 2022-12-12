@@ -65,6 +65,7 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
           title: Text("${widget.list[widget.index]['fecha_implem_siembra']}")),
       body: Container(
@@ -189,13 +190,13 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
                 child: Container(
                     color: Colors.white,
                     child: Column(children: <Widget>[
-                      /*QrImage(
+                      QrImage(
                           //size: 200,//size of the QrImage widget.
                           data: list[index]["id"],//textdata used to create QR code
 
-                        ),*/
+                        ),
                       Text(
-                        list[index]["id"],
+                        "Siembra: ${list[index]["id"]}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(

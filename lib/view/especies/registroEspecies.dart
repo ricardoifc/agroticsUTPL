@@ -9,7 +9,6 @@ class RegistroEspecie extends StatefulWidget {
 }
 
 class _RegistroEspecieState extends State<RegistroEspecie> {
-
   TextEditingController nombre = TextEditingController();
   TextEditingController nombrecientifico = TextEditingController();
   TextEditingController familia = TextEditingController();
@@ -139,6 +138,7 @@ class _RegistroEspecieState extends State<RegistroEspecie> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Adicionar Especie"),
       ),
@@ -151,497 +151,585 @@ class _RegistroEspecieState extends State<RegistroEspecie> {
               Column(
                 children: <Widget>[
                   Text("Taxonomia"),
-          Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: nombre,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'nombre',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: nombrecientifico,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'nombrecientifico',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: familia,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'familia',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: genero,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'genero',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: especie,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'especie',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: origen,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'origen',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: taxonomia,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'taxonomia',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: germina_prendimien,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'germina_prendimien',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: variedad,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'variedad',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: raiz,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'raiz',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: hojas,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'hojas',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: tallo,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'tallo',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: inflorescencia,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'inflorescencia',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: semillas,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'semillas',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: material_vegetal,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'material_vegetal',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: ciclo_de_vida,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'ciclo_de_vida',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: altura,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'altura',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: diametro,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'diametro',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: clima,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'clima',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: optima,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'optima',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: temp_germinacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'temp_germinacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: temp_min_crecimiento,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'temp_min_crecimiento',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: temperaturas,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'temperaturas',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: humedad,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'humedad',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: humendad_porcentaje,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'humendad_porcentaje',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: suelo,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'suelo',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: textura_suelo,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'textura_suelo',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: ph_textura,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'ph_textura',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: zona_produccion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'zona_produccion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: epoca_siembra,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'epoca_siembra',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: riesgo_epoca,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'riesgo_epoca',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: labores_cultivo,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'labores_cultivo',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: semillero,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'semillero',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: cantidad_semillero,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'cantidad_semillero',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: preparacion_terreno,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'preparacion_terreno',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: profun_preparacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'profun_preparacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: recom_preparacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'recom_preparacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: plantacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'plantacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: distancia,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'distancia',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: surcos,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'surcos',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: plantas,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'plantas',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: hileras,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'hileras',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: buena_asosacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'buena_asosacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: mala_asocsacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'mala_asocsacion',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: riesgo,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'riesgo',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: abon_y_fertilizant,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'abon_y_fertilizant',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: mineral_quimico,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'mineral_quimico',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: contr_malas_hierbas,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'contr_malas_hierbas',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: plagas_enfermedades,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'plagas_enfermedades',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: recol_almacen_dias,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'recol_almacen_dias',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: recol_almacen_temp,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'recol_almacen_temp',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: produc_promedia,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'produc_promedia',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: valor_nutricional,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'valor_nutricional',
-        ),
-      ),
-    ),Container(
-      padding: const EdgeInsets.all(10),
-      child: TextField(
-        controller: uso_y_aplicacion,
-        decoration: const InputDecoration(
-          border: OutlineInputBorder(),
-          labelText: 'uso_y_aplicacion',
-        ),
-      ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: nombre,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'nombre',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: nombrecientifico,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'nombrecientifico',
+                      ),
+                    ),
                   ),
 
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: familia,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'familia',
+                      ),
+                    ),
+                  ),
+                  // Text("Familia :", style: const TextStyle(fontSize: 14.0),),
+                  /*Padding(
+                    padding: EdgeInsets.only(left:112, right:112),
+                    child: DropdownButton<String>(
+                      value: familia,
+                      icon: Icon(Icons.keyboard_arrow_down),
+                      iconSize: 30,
+                      elevation: 16,
+                      style: TextStyle(color: Colors.black54, fontSize: 18.0 ),
+                      underline: Container(
+                        decoration: ShapeDecoration(
+                          shape: RoundedRectangleBorder(
+                            side: BorderSide(width: 1.0, style: BorderStyle.solid),
+                            borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                          ),
+                        ),
+                      ),
+                      // Step 4.
+                      items: <String>['docente', 'alumno', 'nuevo']
+                          .map<DropdownMenuItem<String>>((String value) {
+                        return DropdownMenuItem<String>(
+                          value: value,
+                          child: Text(
+                            value,
+                            //style: TextStyle(fontSize: 30),
+                          ),
 
+                        );
+                      }).toList(),
+                      onChanged: (String? newValue) {
+                        setState(() {
+                          familia = newValue!;
+                        });
+                      },
 
-        const Padding(
+                    ),
+                  ),*/
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: genero,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'genero',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: especie,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'especie',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: origen,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'origen',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: taxonomia,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'taxonomia',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: germina_prendimien,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'germina_prendimien',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: variedad,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'variedad',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: raiz,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'raiz',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: hojas,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'hojas',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: tallo,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'tallo',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: inflorescencia,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'inflorescencia',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: semillas,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'semillas',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: material_vegetal,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'material_vegetal',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: ciclo_de_vida,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'ciclo_de_vida',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: altura,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'altura',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: diametro,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'diametro',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: clima,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'clima',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: optima,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'optima',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: temp_germinacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'temp_germinacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: temp_min_crecimiento,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'temp_min_crecimiento',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: temperaturas,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'temperaturas',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: humedad,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'humedad',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: humendad_porcentaje,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'humendad_porcentaje',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: suelo,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'suelo',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: textura_suelo,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'textura_suelo',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: ph_textura,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'ph_textura',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: zona_produccion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'zona_produccion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: epoca_siembra,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'epoca_siembra',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: riesgo_epoca,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'riesgo_epoca',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: labores_cultivo,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'labores_cultivo',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: semillero,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'semillero',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: cantidad_semillero,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'cantidad_semillero',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: preparacion_terreno,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'preparacion_terreno',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: profun_preparacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'profun_preparacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: recom_preparacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'recom_preparacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: plantacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'plantacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: distancia,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'distancia',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: surcos,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'surcos',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: plantas,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'plantas',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: hileras,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'hileras',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: buena_asosacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'buena_asosacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: mala_asocsacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'mala_asocsacion',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: riesgo,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'riesgo',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: abon_y_fertilizant,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'abon_y_fertilizant',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: mineral_quimico,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'mineral_quimico',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: contr_malas_hierbas,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'contr_malas_hierbas',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: plagas_enfermedades,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'plagas_enfermedades',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: recol_almacen_dias,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'recol_almacen_dias',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: recol_almacen_temp,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'recol_almacen_temp',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: produc_promedia,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'produc_promedia',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: valor_nutricional,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'valor_nutricional',
+                      ),
+                    ),
+                  ),
+                  Container(
+                    padding: const EdgeInsets.all(10),
+                    child: TextField(
+                      controller: uso_y_aplicacion,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'uso_y_aplicacion',
+                      ),
+                    ),
+                  ),
+                  const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
                   Container(

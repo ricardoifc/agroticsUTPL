@@ -58,6 +58,7 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(title: Text("${widget.list[widget.index]['nombre']}")),
       body: Container(
         height: 700.0,
@@ -72,7 +73,7 @@ void confirm (){
                 ConstrainedBox(
                   constraints: const BoxConstraints(
                     minHeight: 50.0,
-                    maxHeight: 420,
+                    maxHeight: 400,
                   ),
 
                   child: ListView(
@@ -135,7 +136,7 @@ void confirm (){
                       Text("valor_nutricional : ${widget.list[widget.index]['valor_nutricional']}", style: const TextStyle(fontSize: 14.0),),
                       Text("uso_y_aplicacion : ${widget.list[widget.index]['uso_y_aplicacion']}", style: const TextStyle(fontSize: 14.0),),
                       Text("fecha_registro : ${widget.list[widget.index]['fecha_registro']}", style: const TextStyle(fontSize: 14.0),),
-                      Text("usuario_registro : ${widget.list[widget.index]['usuario_registro']}", style: const TextStyle(fontSize: 18.0),),
+                      Text("usuario_registro : ${widget.list[widget.index]['usuario_registro']}", style: const TextStyle(fontSize: 14.0),),
 
                     ],
                   ),

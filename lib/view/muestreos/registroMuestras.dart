@@ -89,6 +89,7 @@ class _RegistroMuestrasState extends State<RegistroMuestras> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("Adicionar Especie"),
       ),

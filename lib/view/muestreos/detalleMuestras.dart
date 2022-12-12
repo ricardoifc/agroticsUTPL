@@ -57,6 +57,7 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(title: Text("${widget.list[widget.index]['fecha_muestreo']}")),
       body: Container(
         height: 700.0,

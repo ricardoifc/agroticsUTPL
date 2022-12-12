@@ -61,6 +61,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("EDITAR"),
       ),
@@ -71,7 +72,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
               Column(
                 children: <Widget>[
                  ListTile(
-                    leading: const Icon(Icons.person, color: Colors.black),
+                    //leading: const Icon(Icons.person, color: Colors.black),
                     title: TextFormField(
                       controller: controllerUsername,
                           validator: (value) {
@@ -83,7 +84,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                     ),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.privacy_tip, color: Colors.black),
+                    //leading: const Icon(Icons.privacy_tip, color: Colors.black),
                     title: TextFormField(
                       controller: controllerPassword,
                           validator: (value) {
@@ -98,7 +99,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                     padding: EdgeInsets.all(4.0),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.supervised_user_circle, color: Colors.black),
+                   // leading: const Icon(Icons.supervised_user_circle, color: Colors.black),
                     title: Text(
                     "Rol", style: const TextStyle(fontSize: 12.0),
                   ),
@@ -127,7 +128,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                   ),
 
                   ListTile(
-                    leading: const Icon(Icons.emoji_people_outlined, color: Colors.black),
+                   // leading: const Icon(Icons.emoji_people_outlined, color: Colors.black),
                     title: TextFormField(
                       controller: controllerName,
                       validator: (value) {
@@ -139,7 +140,7 @@ class _EditarUsuarioState extends State<EditarUsuario> {
                     ),
                   ),
                   ListTile(
-                    leading: const Icon(Icons.emoji_people_outlined, color: Colors.black),
+                   // leading: const Icon(Icons.emoji_people_outlined, color: Colors.black),
                     title: TextFormField(
                       controller: controllerLastName,
                       validator: (value) {

@@ -1,5 +1,6 @@
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/view/addmuestreos/identificarAddMuestra.dart';
+import 'package:agrotics/view/addprestamo/identificarAddPrestamo.dart';
 import 'package:agrotics/view/herramienta_logs/listarHerramienta_logs.dart';
 import 'package:agrotics/view/herramientas/listarHerramientas.dart';
 import 'package:agrotics/view/muestreos/listarMuestras.dart';
@@ -35,6 +36,7 @@ class MenuCapturaPage extends StatelessWidget {
     double tamIcon = 60;
     double tamText = 14;
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text('Menu'),
         actions: <Widget>[
@@ -42,14 +44,14 @@ class MenuCapturaPage extends StatelessWidget {
             icon: const Icon(Icons.settings),
             onPressed: () {},
           ),
-          IconButton(
+          /*IconButton(
             icon: const Icon(
               Icons.exit_to_app,
             ),
             onPressed: () {
               Navigator.pushReplacementNamed(context, '/login');
             },
-          ),
+          ),*/
         ],
       ),
       //backgroundColor: Colors.grey,
@@ -106,6 +108,50 @@ class MenuCapturaPage extends StatelessWidget {
                 ),
               ),
             ),
+            /*Visibility(
+              visible: isVisibleAlumno,
+              child: Container(
+                padding: const EdgeInsets.all(7.0),
+                child: RawMaterialButton(
+                  onPressed: () {
+                    Navigator.of(context).push(MaterialPageRoute(
+                        builder: (BuildContext context) => IdentificarAddPrestamos()));
+                  },
+                  shape: RoundedRectangleBorder(
+                    borderRadius: BorderRadius.circular(15.0),
+                  ),
+                  elevation: 2.0,
+                  fillColor: GlobalColor.colorCards,
+                  padding: const EdgeInsets.all(7.0),
+
+                  child: Column(
+                    mainAxisSize: MainAxisSize.max,
+                    children: <Widget>[
+                      ImageIcon(
+                        AssetImage('assets/icons/registro_herramientas.png'),
+                        color: GlobalColor.colorIconosPrincipal,
+                        size: tamIcon,
+                      ),
+                      FittedBox(
+                        fit: BoxFit.cover,
+                        child:
+                        Text(
+                          "Prestamo Herramienta",
+                          style: TextStyle(fontSize: tamText),
+                        ),),
+                      FittedBox(
+                        fit: BoxFit.cover,
+                        child:
+                        Text(
+                          "Prestamo de herramienta",
+                          style: TextStyle(fontSize: tamText),
+                        ),
+                      ),
+                    ],
+                  ),
+                ),
+              ),
+            ),*/
 
           ]),
     );

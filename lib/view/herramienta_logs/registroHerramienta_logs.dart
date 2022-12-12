@@ -50,6 +50,7 @@ class _RegistroHerramienta_logsState extends State<RegistroHerramienta_logs> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
         title: const Text("herramienta"),
       ),

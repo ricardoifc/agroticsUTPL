@@ -128,11 +128,11 @@ class ItemList extends StatelessWidget {
                   size: 60.0,
                 ),
                 title: Text(
-                  list[i]['fecha_implem_siembra'],
+                  list[i]['id'],
                   style: const TextStyle(fontSize: 25.0, color: GlobalColor.colorTextPrincipal),
                 ),
                 subtitle: Text(
-                  "ID de especie: \n ${list[i]['id_especie']}",
+                  "Fecha de implementación:\n ${list[i]['fecha_implem_siembra']}",
                   style: const TextStyle(fontSize: 20.0, color: GlobalColor.colorTextSecundario),
                 ),
 

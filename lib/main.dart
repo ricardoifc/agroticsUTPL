@@ -19,16 +19,17 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+
       debugShowCheckedModeBanner: false,
       title: 'Agrotics app',
       theme: ThemeData(
-          primaryColor: GlobalColor.colorPrincipal,
+
           appBarTheme: const AppBarTheme(
             color: GlobalColor.colorBarApp,
           )
       ),
 
-      home: LoginPage(),
+      home: MenuPage(username: "admin",rol: "docente"),
       routes: <String,WidgetBuilder>{
         '/login': (BuildContext context)=> LoginPage(),
         '/register': (BuildContext context)=> RegisterPage(),

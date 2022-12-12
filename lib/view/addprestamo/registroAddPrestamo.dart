@@ -1,22 +1,23 @@
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
-import 'package:agrotics/view/herramientas/listarHerramientas.dart';
+import 'package:agrotics/view/herramienta_logs/listarHerramienta_logs.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 
-class RegistroHerramienta extends StatefulWidget {
+class RegistroAddPrestamo extends StatefulWidget {
   @override
-  _RegistroHerramientaState createState() => _RegistroHerramientaState();
+  _RegistroAddPrestamoState createState() => _RegistroAddPrestamoState();
 }
 
-class _RegistroHerramientaState extends State<RegistroHerramienta> {
+class _RegistroAddPrestamoState extends State<RegistroAddPrestamo> {
 
-  TextEditingController herramienta = TextEditingController();
-  TextEditingController disponibilidad = TextEditingController();
-  TextEditingController fecha_alta = TextEditingController();
-  TextEditingController fecha_baja = TextEditingController();
-  TextEditingController estado_herramienta = TextEditingController();
+  TextEditingController id_herramienta = TextEditingController();
+  //TextEditingController usuario_registro = TextEditingController();
+  TextEditingController fecha = TextEditingController();
+  TextEditingController novedad = TextEditingController();
+  TextEditingController estado_actual = TextEditingController();
+
   final dateNow = DateTime.now();
   var usuario_registro = "admin";
 
@@ -27,15 +28,15 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
   final _formKey = GlobalKey<FormState>();
 
   void _register() {
-    print('adddataherramientas');
-    var url = Uri.parse(conexion() + "herramientas/adddataherramientas.php");
+    print('adddataherramienta_logs');
+    var url = Uri.parse(conexion() + "herramienta_logs/adddataherramienta_logs.php");
 
     http.post(url, body: {
-      'herramienta': herramienta.text,
-      'disponibilidad': disponibilidad.text,
-      'fecha_alta': fecha_alta.text,
-      'fecha_baja': fecha_baja.text,
-      'estado_herramienta': estado_herramienta.text,
+      'id_herramienta': id_herramienta.text,
+      'usuario_registro': usuario_registro,
+      'fecha': fecha.text,
+      'novedad': novedad.text,
+      'estado_actual': estado_actual.text,
       "fecha_registro": dateNow.toString(),
       "usuario_registro": usuario_registro,
 
@@ -51,7 +52,7 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
     return Scaffold(
       backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
-        title: const Text("Adicionar Campo"),
+        title: const Text("herramienta"),
       ),
       body: Form(
         key: _formKey,
@@ -65,25 +66,18 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
           Container(
           padding: const EdgeInsets.all(10),
           child: TextField(
-            controller: herramienta,
+            controller: id_herramienta,
             decoration: const InputDecoration(
               border: OutlineInputBorder(),
-              labelText: 'Nombre herramienta',
+              labelText: 'id herramienta',
             ),
           ),
-        ),Container(
-        padding: const EdgeInsets.all(10),
-        child: TextField(
-          controller: disponibilidad,
-          decoration: const InputDecoration(
-            border: OutlineInputBorder(),
-            labelText: 'Disponibilidad',
-          ),
         ),
-      ),Container(
+
+                  Container(
         padding: const EdgeInsets.all(10),
         child: TextField(
-          controller: fecha_alta,
+          controller: fecha,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
             labelText: 'Fecha de ingreso',
@@ -92,25 +86,22 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
       ),Container(
         padding: const EdgeInsets.all(10),
         child: TextField(
-          controller: fecha_baja,
+          controller: novedad,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'fecha de salida',
+            labelText: 'Tipo de novedad',
           ),
         ),
       ),Container(
         padding: const EdgeInsets.all(10),
         child: TextField(
-          controller: estado_herramienta,
+          controller: estado_actual,
           decoration: const InputDecoration(
             border: OutlineInputBorder(),
-            labelText: 'Estado que se encuentra',
+            labelText: 'Estado actual de herramienta',
           ),
         ),
       ),
-
-
-
 
 
 
@@ -129,7 +120,7 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
                           Navigator.pop(context);
                           Navigator.pop(context);
                           Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) => ListarHerramientas()));
+                              builder: (BuildContext context) => ListarHerramientas_logs()));
                         },
                       )),
                   const Padding(

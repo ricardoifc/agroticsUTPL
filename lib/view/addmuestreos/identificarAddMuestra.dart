@@ -1,10 +1,8 @@
-import 'dart:io';
-
 import 'package:agrotics/Util/global_color.dart';
-import 'package:agrotics/view/addmuestreos/registroAddMuestras.dart';
-import 'package:flutter/foundation.dart';
+import 'package:agrotics/view/addmuestreos/registroAddMuestras2.dart';
 import 'package:flutter/material.dart';
-import 'package:qr_code_scanner/qr_code_scanner.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
 
 class IdentificarAddMuestras extends StatefulWidget {
   @override
@@ -12,7 +10,7 @@ class IdentificarAddMuestras extends StatefulWidget {
 }
 
 class _IdentificarAddMuestrasState extends State<IdentificarAddMuestras> {
-  Barcode? result;
+  var getResult = 'sin datos';
   late String id_siembra = "Sin elegir";
 
   final dateNow = DateTime.now();
@@ -20,146 +18,86 @@ class _IdentificarAddMuestrasState extends State<IdentificarAddMuestras> {
 
   final _formKey = GlobalKey<FormState>();
   final GlobalKey qrKey = GlobalKey(debugLabel: 'QR');
-
-  QRViewController? controller;
-
-  void _register() {}
-
-  void reassemble() {
-    super.reassemble();
-    if (Platform.isAndroid) {
-      controller!.pauseCamera();
-    } else if (Platform.isIOS) {
-      controller!.resumeCamera();
-    }
-  }
+  var texto = "x";
+  final dataR = Data(text: "");
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
-        title: const Text("Identificar muestra"),
+        title: const Text("Nueva muestra"),
       ),
       body: Form(
         key: _formKey,
-        child: Padding(
-            padding: const EdgeInsets.all(10.0),
-            child: Column(children: <Widget>[
-              Expanded(
-                flex: 5,
-                child: QRView(
-                  key: qrKey,
-                  onQRViewCreated: _onQRViewCreated,
-                  // overlay: QrScannerOverlayShape(
-                  //   borderRadius: 10,
-                  //   borderWidth: 5,
-                  //   borderColor: Colors.white,
-                  // ),
+        child: Center(
+          child: Padding(
+              padding: const EdgeInsets.all(10.0),
+              child: Column(children: <Widget>[
+                ElevatedButton(
+                  onPressed: () {
+                    scanQRCode();
+                  },
+                  child: Text('Escanear Siembra'),
+                  style: ElevatedButton.styleFrom(
+                    primary:
+                        GlobalColor.colorBotonPrincipal, // Background color
+                  ),
                 ),
-              ),
-              Expanded(
-                flex: 1,
-                child: Center(
-                  child: (result != null)
-                      ? Text(
-                      'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
-                      : Text('Scan a code'),
+                SizedBox(
+                  height: 20.0,
                 ),
-              )
-              /*Expanded(child: Row(
-                  children: <Widget>[
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text("ID:"),
-                    ),
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      child: Text(id_siembra),
-                    ),
-
-                    Container(
-                      //height: 50,
-                        padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-                        child: RaisedButton(
-                          textColor: GlobalColor.colorBotonTextPrincipal,
-                          color: GlobalColor.colorBotonPrincipal,
-                          child: Text('Agregar'),
-                          onPressed: () {
-                            Navigator.of(context).push(MaterialPageRoute(builder: (BuildContext context) => RegistroAddMuestras()));
-                            //Navigator.pop(context);
-                          },
-                        )),
-                  ]
-              ),*/
-             // ),
-              // ListView(
-              //   children: <Widget>[
-              //
-              //     Column(
-              //       children: <Widget>[
-              //
-              //         // QRView(
-              //         //   cameraFacing: CameraFacing.back,
-              //         //   key: qrKey,
-              //         //   onQRViewCreated: _onQRViewCreated,
-              //         //   overlay: QrScannerOverlayShape(
-              //         //     borderRadius: 10,
-              //         //     borderWidth: 5,
-              //         //     borderColor: Colors.white,
-              //         //   ),
-              //         //),
-              //         Row(
-              //             children: <Widget>[
-              //               Container(
-              //                 padding: const EdgeInsets.all(10),
-              //                 child: Text("ID:"),
-              //               ),
-              //               Container(
-              //                 padding: const EdgeInsets.all(10),
-              //               child: Text(id_siembra),
-              //               ),
-              //
-              //               Container(
-              //                   //height: 50,
-              //                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
-              //                   child: RaisedButton(
-              //                     textColor: GlobalColor.colorBotonTextPrincipal,
-              //                     color: GlobalColor.colorBotonPrincipal,
-              //                     child: Text('Agregar'),
-              //                     onPressed: () {
-              //                       _register();
-              //                       Navigator.pop(context);
-              //                       //Navigator.pop(context);
-              //                     },
-              //                   )),
-              //           ]
-              //         ),
-              //
-              //       ],
-              //     ),
-              //   ],
-              // ),
-
-            ]
-            )
+                Text("ID de siembra:"),
+                Text(getResult),
+                Container(
+                  //height: 50,
+                  padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
+                  child: ElevatedButton(
+                      //style: style,
+                      onPressed: () {
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => RegistroAddMuestras2(
+                                    data: dataR,
+                                  )),
+                        );
+                      },
+                      child: const Text('Agregar'),
+                      style: ElevatedButton.styleFrom(
+                        primary: GlobalColor.colorBotonPrincipal,
+                      )),
+                ),
+              ])),
         ),
       ),
     );
   }
-  void _onQRViewCreated(QRViewController controller) {
-    this.controller = controller;
-    controller.scannedDataStream.listen((scanData) {
+
+  void scanQRCode() async {
+    try {
+      final qrCode = await FlutterBarcodeScanner.scanBarcode(
+          '#ff6666', 'Cancelar', true, ScanMode.QR);
+
+      if (!mounted) return;
+
       setState(() {
-        result = scanData;
+        getResult = qrCode;
+        Data(text: getResult);
       });
-    });
+      print("QRCode_Result:--");
+      print(qrCode);
+    } on PlatformException {
+      getResult = 'Error al escaneár codigo QR.';
+    }
   }
+}
 
-  @override
-  void dispose() {
-    controller?.dispose();
-    super.dispose();
+class Data {
+  String text;
+  Data({required this.text});
+
+  void set texto(String texto) {
+    text = texto;
   }
-
-
 }

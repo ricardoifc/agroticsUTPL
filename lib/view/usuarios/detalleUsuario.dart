@@ -56,16 +56,16 @@ void confirm (){
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(title: Text("${widget.list[widget.index]['username']}")),
       body: Container(
-        height: 270.0, 
+        height: 270.0,
         padding: const EdgeInsets.all(20.0),
         child: Card(
-          child: Center(
             child: Column(
               children: <Widget>[
 
-                const Padding(padding: EdgeInsets.only(top: 30.0),),
+                const Padding(padding: EdgeInsets.only(top: 1.0),),
                 Text(widget.list[widget.index]['username'], style: const TextStyle(fontSize: 20.0),),
                 const Divider(),
                 Text("rol : ${widget.list[widget.index]['rol']}\nRegistrado por: ${widget.list[widget.index]['usuario_registro']}\n${widget.list[widget.index]['fecha_registro']}", style: const TextStyle(fontSize: 18.0),),
@@ -104,7 +104,7 @@ void confirm (){
               ],
             ),
           ),
-        ),
+
       ),
     );
   }
