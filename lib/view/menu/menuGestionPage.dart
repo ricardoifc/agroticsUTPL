@@ -6,7 +6,7 @@ import 'package:agrotics/view/siembras/listarSiembras.dart';
 import 'package:agrotics/view/ubicaciones/listarUbicaciones.dart';
 import 'package:agrotics/view/usuarios/listarUsuario.dart';
 import 'package:flutter/material.dart';
-import 'especies/listarEspecies.dart';
+import '../especies/listarEspecies.dart';
 
 
 class MenuGestionPage extends StatelessWidget {
@@ -65,7 +65,7 @@ class MenuGestionPage extends StatelessWidget {
                 child: RawMaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarSiembras()));
+                        builder: (BuildContext context) => ListarSiembras(username: username, rol: rol)));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

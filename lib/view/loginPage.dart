@@ -20,7 +20,7 @@ class _LoginPageState extends State<LoginPage> {
 
   String msg='';
 
-  Future<List> _login() async {
+/*  Future<List> _login() async {
     print('xx');
     final response = await http.post(Uri.parse(conexion()+"login.php"), body: {
       "username": user.text,
@@ -66,13 +66,21 @@ class _LoginPageState extends State<LoginPage> {
       });
     }
     return datauserjson;
+  }*/
+
+  void menu(){
+    Navigator.pushReplacementNamed(context, '/menu');
+    setState(() {
+      username= "docente";
+      nivel = "docente";
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
         backgroundColor: GlobalColor.colorBackground,
-      appBar: AppBar(title: const Text("Iniciar sesión"),),
+      appBar: AppBar(title: const Text("Bienvenido"),),
         body: Padding(
             padding: EdgeInsets.all(10),
             child: ListView(
@@ -86,8 +94,33 @@ class _LoginPageState extends State<LoginPage> {
                           color: GlobalColor.colorPrincipal,
                           fontWeight: FontWeight.w500,
                           fontSize: 40),
-                    )),
+                    ),
+                ),
                 Container(
+                  alignment: Alignment.center,
+                  padding: const EdgeInsets.all(10),
+                  child: const Text(
+                    '¡Bienvenido a la aplicación de Agrotics! Esperamos que disfrutes de todas las funcionalidades y herramientas que ofrecemos para ayudarte a capturar, almacenar y gestionar tus datos de muestras de manera eficiente y precisa.',
+                    style: TextStyle(
+                        color: GlobalColor.colorTextPrincipal,
+                        fontWeight: FontWeight.w500,
+                        fontSize: 15),
+                  ),
+                ),
+
+                Container(
+                  height: 50,
+                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                  child: RaisedButton(
+                    textColor: GlobalColor.colorBotonTextPrincipal,
+                    color: GlobalColor.colorBotonPrincipal,
+                    child: const Text('Ingresa al menú'),
+                    onPressed: () {
+                      menu();
+                    },
+                  ),
+                ),
+                /*Container(
                     alignment: Alignment.center,
                     //padding: const EdgeInsets.all(10),
                     child: const Text(
@@ -96,7 +129,8 @@ class _LoginPageState extends State<LoginPage> {
                           color: GlobalColor.colorTextPrincipal,
                           fontWeight: FontWeight.w500,
                           fontSize: 15),
-                    )),
+                    ),
+                ),
 
                 Container(
                   padding: EdgeInsets.all(10),
@@ -132,7 +166,8 @@ class _LoginPageState extends State<LoginPage> {
                       onPressed: () {
                         _login();
                       },
-                    )),
+                    ),
+                ),
 
                 FlatButton(
                   onPressed: (){
@@ -141,23 +176,22 @@ class _LoginPageState extends State<LoginPage> {
                   textColor: GlobalColor.colorSecundario,
                   child: const Text('Recuperar contraseña'),
                 ),
-                Container(
-                    child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: <Widget>[
-                        const Text('¿No tienes cuenta?'),
-                        FlatButton(
-                          textColor: GlobalColor.colorSecundario,
-                          child: const Text(
-                            'Registrate',
-                            style: TextStyle(fontSize: 17),
-                          ),
-                          onPressed: () {
-                            Navigator.pushReplacementNamed(context, '/register');
-                          },
-                        )
-                      ],
-                    ))
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: <Widget>[
+                    const Text('¿No tienes cuenta?'),
+                    FlatButton(
+                      textColor: GlobalColor.colorSecundario,
+                      child: const Text(
+                        'Registrate',
+                        style: TextStyle(fontSize: 17),
+                      ),
+                      onPressed: () {
+                        Navigator.pushReplacementNamed(context, '/register');
+                      },
+                    )
+                  ],
+                )*/
               ],
             ))
     );

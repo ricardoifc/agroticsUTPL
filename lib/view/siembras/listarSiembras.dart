@@ -2,6 +2,7 @@ import 'dart:async';
 import 'dart:convert';
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
+import 'package:agrotics/view/loginPage.dart';
 import 'package:agrotics/view/siembras/detalleSiembras.dart';
 import 'package:agrotics/view/siembras/registroSiembras.dart';
 import 'package:flutter/material.dart';
@@ -10,11 +11,15 @@ import 'package:http/http.dart' as http;
 
 
 class ListarSiembras extends StatefulWidget {
+
+  ListarSiembras({Key? key, required, required String username, required String rol});
+
   @override
   _ListarSiembrasState createState() => new _ListarSiembrasState();
 }
 
 class _ListarSiembrasState extends State<ListarSiembras> {
+
   Future<List> getData() async {
     final response = await http.get(Uri.parse(conexion()+"siembras/getdatasiembras.php"));
     return json.decode(response.body);
@@ -66,6 +71,7 @@ class _ListarSiembrasState extends State<ListarSiembras> {
             ),
             ItemList(
               list: snapshot.requireData,
+              username: username,
             )
           ])
               : const Center(
@@ -79,24 +85,9 @@ class _ListarSiembrasState extends State<ListarSiembras> {
 
 class ItemList extends StatelessWidget {
   final List list;
-  ItemList({required this.list});
+  var username;
 
-  // Future<List> getDataUbicacion() async {
-  //   final response = await http.get(Uri.parse(conexion()+"ubicaciones/getdataubicaciones.php"));
-  //   return json.decode(response.body);
-  // }
-  // Future<String> getDataEspecie() async {
-  //   final response = await http.get(Uri.parse(conexion()+"especies/getdataespecie.php"));
-  //   var getRequestedData = jsonDecode(response.body);
-  //   return getRequestedData;
-  // }
-  //
-  // String getNombreCientifico(String ValorNombre){
-  //   String valor;
-  //   print("en getNombreCientifico");
-  //   valor = "x";
-  //   return valor;
-  // }
+  ItemList({required this.list, required this.username});
 
 
   @override
@@ -114,6 +105,7 @@ class ItemList extends StatelessWidget {
                   builder: (BuildContext context) => DetalleSiembras(
                     list: list,
                     index: i,
+                    username: username
                   )),
             ),
             child: Card(
@@ -128,14 +120,13 @@ class ItemList extends StatelessWidget {
                   size: 60.0,
                 ),
                 title: Text(
-                  list[i]['id'],
+                  list[i]['info'],
                   style: const TextStyle(fontSize: 25.0, color: GlobalColor.colorTextPrincipal),
                 ),
                 subtitle: Text(
-                  "Fecha de implementación:\n ${list[i]['fecha_implem_siembra']}",
+                  "Fecha de implementación:\n${list[i]['fecha_implem_siembra']}",
                   style: const TextStyle(fontSize: 20.0, color: GlobalColor.colorTextSecundario),
                 ),
-
               ),
             ),
           ),

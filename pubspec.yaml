@@ -16,6 +16,12 @@ dependencies:
   share_plus: ^2.1.2
   path_provider:
   flutter_barcode_scanner: ^2.0.0
+  intl: ^0.17.0
+  sqflite: ^2.0.2+1
+  connectivity_plus: ^2.3.9
+  rxdart: ^0.27.7
+  flutter_bloc: ^8.1.1
+
 
 
 

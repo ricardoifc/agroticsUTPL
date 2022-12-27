@@ -3,6 +3,8 @@ import 'dart:ui';
 import 'dart:io';
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
+import 'package:agrotics/view/loginPage.dart';
+import 'package:agrotics/view/menu/menuPage.dart';
 import 'package:agrotics/view/siembras/editarSiembras.dart';
 import 'package:agrotics/view/siembras/listarSiembras.dart';
 import 'package:flutter/material.dart';
@@ -15,7 +17,8 @@ import 'package:path_provider/path_provider.dart';
 class DetalleSiembras extends StatefulWidget {
   List list;
   int index;
-  DetalleSiembras({required this.index, required this.list});
+  String username;
+  DetalleSiembras({required this.index, required this.list, required this.username});
   @override
   _DetalleSiembrasState createState() => _DetalleSiembrasState();
 }
@@ -44,10 +47,11 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
             deleteData();
             Navigator.pop(context);
             Navigator.pop(context);
-            Navigator.pop(context);
-            Navigator.of(context).push(MaterialPageRoute(
+            //Navigator.pop(context);
+            /*Navigator.of(context).push(MaterialPageRoute(
               builder: (BuildContext context) => ListarSiembras(),
-            ));
+            ),
+            );*/
           },
         ),
         RaisedButton(
@@ -67,7 +71,7 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
     return Scaffold(
       backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
-          title: Text("${widget.list[widget.index]['fecha_implem_siembra']}")),
+          title: Text("${widget.list[widget.index]['info']}")),
       body: Container(
         height: 700.0,
         padding: const EdgeInsets.all(20.0),
@@ -75,6 +79,11 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
           // child: Center(
           child: Column(
             children: <Widget>[
+              Text(username),
+              Text(
+                widget.list[widget.index]['info'],
+                style: const TextStyle(fontSize: 20.0),
+              ),
               Text(
                 widget.list[widget.index]['fecha_implem_siembra'],
                 style: const TextStyle(fontSize: 20.0),
@@ -102,8 +111,10 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
                             color: GlobalColor.colorBotonTextPrincipal),
                       ),
                     ),
-
-                    //const Padding(padding: EdgeInsets.only(top: 10.0),),
+                    Text(
+                      "Especie y Ubicacion: ${widget.list[widget.index]['info']}",
+                      style: const TextStyle(fontSize: 14.0),
+                    ),
                     Text(
                       "Identificador : ${widget.list[widget.index]['id']}",
                       style: const TextStyle(fontSize: 14.0),
@@ -180,7 +191,7 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
       showDialog(
         context: context,
         builder: (context) {
-          print(list[index]["id"]);
+          //print(list[index]["id"]);
           //final _singleNotifier = Provider.of<SingleNotifier>(context);
           return AlertDialog(
             title: const Text("QR Generado"),
@@ -196,7 +207,7 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
 
                         ),
                       Text(
-                        "Siembra: ${list[index]["id"]}",
+                        "${list[index]["info"]}|${list[index]["id"]}",
                         style: TextStyle(fontWeight: FontWeight.bold),
                       ),
                       Text(

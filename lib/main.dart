@@ -1,10 +1,12 @@
+import 'package:agrotics/Util/check_internet_connection.dart';
 import 'package:agrotics/view/loginPage.dart';
-import 'package:agrotics/view/menuPage.dart';
+import 'package:agrotics/view/menu/menuPage.dart';
 import 'package:agrotics/view/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'Util/global_color.dart';
 import 'dart:io';
 
+final internetChecker = CheckInternetConnection();
 
 void main() {
 
@@ -29,7 +31,7 @@ class MyApp extends StatelessWidget {
           )
       ),
 
-      home: MenuPage(username: "admin",rol: "docente"),
+      home: LoginPage(),
       routes: <String,WidgetBuilder>{
         '/login': (BuildContext context)=> LoginPage(),
         '/register': (BuildContext context)=> RegisterPage(),

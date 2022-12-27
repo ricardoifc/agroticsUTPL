@@ -3,6 +3,7 @@ import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
+import 'package:intl/intl.dart';
 
 class RegistroSiembras extends StatefulWidget {
   @override
@@ -49,6 +50,7 @@ class _RegistroSiembrasState extends State<RegistroSiembras> {
       'fecha_implem_siembra': fecha_implem_siembra.text,
       "fecha_registro": dateNow.toString(),
       "usuario_registro": usuario_registro,
+      "info": ("$text_nombre|$text_lugar_lote"),
     });
   }
 
@@ -123,14 +125,54 @@ class _RegistroSiembrasState extends State<RegistroSiembras> {
 
                   Container(
                     padding: const EdgeInsets.all(10),
-                    child: TextField(
-                      controller: fecha_implem_siembra,
-                      decoration: const InputDecoration(
-                        border: OutlineInputBorder(),
-                        labelText: 'Fecha de ingreso',
-                      ),
+                    child: Row(
+                      children: [
+                        Flexible(
+                          child: TextField(
+                            controller:
+                            fecha_implem_siembra, //editing controller of this TextField
+                            decoration: const InputDecoration(
+                              border: OutlineInputBorder(),
+                              labelText: 'Fecha de ingreso',
+                            ),
+                            readOnly:
+                            true, //set it true, so that user will not able to edit text
+                            onTap: () async {
+                              DateTime? pickedDate = await showDatePicker(
+                                  context: context,
+                                  initialDate: DateTime.now(),
+                                  firstDate: DateTime(
+                                      2000), //DateTime.now() - not to allow to choose before today.
+                                  lastDate: DateTime(2101));
+
+                              if (pickedDate != null) {
+                                print(
+                                    pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                String formattedDate =
+                                DateFormat('dd/MM/yyyy')
+                                    .format(pickedDate);
+                                print(
+                                    formattedDate); //formatted date output using intl package =>  2021-03-16
+                                //you can implement different kind of Date Format here according to your requirement
+                                fecha_implem_siembra.text = formattedDate;
+                                /*setState(() {
+                                      fechas_aplic_fertiliza.text = formattedDate; //set output date to TextField value.
+                                    }
+                                    );*/
+                              } else {
+                                print("Date is not selected");
+                              }
+                            },
+                          ),
+                        ),
+                        const SizedBox(
+                          width: 90,
+                          child: Text(" ( Fecha ) "),
+                        ),
+                      ],
                     ),
                   ),
+
                   const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
