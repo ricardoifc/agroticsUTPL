@@ -1,9 +1,7 @@
 import 'package:agrotics/Util/global_color.dart';
-import 'package:agrotics/testpage.dart';
 import 'package:agrotics/view/addmuestreos/listarMuestras.dart';
 import 'package:agrotics/view/addmuestreos/registroMuestra.dart';
 import 'package:agrotics/view/addmuestreos/subirMuestras.dart';
-import 'package:agrotics/view/loginPage.dart';
 import 'package:agrotics/view/menu/menuGestionPage.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_barcode_scanner/flutter_barcode_scanner.dart';
