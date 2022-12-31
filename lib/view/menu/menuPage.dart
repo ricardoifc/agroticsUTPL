@@ -22,7 +22,7 @@ class MenuPage extends StatelessWidget {
     if (rol == 'docente') {
       isVisibleDocente = true;
       isVisibleAlumno = true;
-    } else if (rol == 'alumno') {
+    } else if (rol == 'estudiante') {
       isVisibleDocente = false;
       isVisibleAlumno = true;
     } else {
@@ -34,18 +34,19 @@ class MenuPage extends StatelessWidget {
     return Scaffold(
       backgroundColor: GlobalColor.colorBackground,
       appBar: AppBar(
-        title: Text("Bienvenido $username"),
+        title: Text("Menu $rol"),
+        automaticallyImplyLeading: false,
         actions: <Widget>[
-          IconButton(
+          /*IconButton(
             icon: const Icon(Icons.settings),
             onPressed: () {},
-          ),
+          ),*/
           IconButton(
             icon: const Icon(
               Icons.exit_to_app,
             ),
             onPressed: () {
-              Navigator.pushReplacementNamed(context, '/login');
+              Navigator.pop(context);
             },
           ),
         ],
@@ -56,9 +57,7 @@ class MenuPage extends StatelessWidget {
           crossAxisCount: 3,
         ),
         children: <Widget>[
-          Visibility(
-            visible: isVisibleAlumno,
-            child: Container(
+          if (isVisibleAlumno) Container(
               padding: const EdgeInsets.all(7.0),
               child: RawMaterialButton(
                 onPressed: () async {
@@ -128,10 +127,7 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: isVisibleAlumno,
-            child: Container(
+          if (isVisibleAlumno) Container(
               padding: const EdgeInsets.all(7.0),
               child: RawMaterialButton(
                 onPressed: () {
@@ -171,10 +167,7 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: isVisibleDocente,
-            child: Container(
+        if (isVisibleAlumno) Container(
               padding: const EdgeInsets.all(7.0),
               child: RawMaterialButton(
                 onPressed: () {
@@ -214,47 +207,43 @@ class MenuPage extends StatelessWidget {
                 ),
               ),
             ),
-          ),
-          Visibility(
-            visible: isVisibleDocente,
-            child: Container(
+          if (isVisibleDocente) Container(
+            padding: const EdgeInsets.all(7.0),
+            child: RawMaterialButton(
+              onPressed: () {
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (BuildContext context) =>
+                        MenuGestionPage(username: username, rol: rol)));
+              },
+              shape: RoundedRectangleBorder(
+                borderRadius: BorderRadius.circular(15.0),
+              ),
+              elevation: 2.0,
+              fillColor: GlobalColor.colorCards,
               padding: const EdgeInsets.all(7.0),
-              child: RawMaterialButton(
-                onPressed: () {
-                  Navigator.of(context).push(MaterialPageRoute(
-                      builder: (BuildContext context) =>
-                          MenuGestionPage(username: username, rol: rol)));
-                },
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(15.0),
-                ),
-                elevation: 2.0,
-                fillColor: GlobalColor.colorCards,
-                padding: const EdgeInsets.all(7.0),
-                child: Column(
-                  mainAxisSize: MainAxisSize.max,
-                  children: <Widget>[
-                    ImageIcon(
-                      AssetImage('assets/icons/gestion.png'),
-                      color: GlobalColor.colorIconosPrincipal,
-                      size: tamIcon,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                children: <Widget>[
+                  ImageIcon(
+                    AssetImage('assets/icons/gestion.png'),
+                    color: GlobalColor.colorIconosPrincipal,
+                    size: tamIcon,
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      "Gestion de datos",
+                      style: TextStyle(fontSize: tamText),
                     ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        "Gestion de datos",
-                        style: TextStyle(fontSize: tamText),
-                      ),
+                  ),
+                  FittedBox(
+                    fit: BoxFit.scaleDown,
+                    child: Text(
+                      "Especies, Ubicacion, etc",
+                      style: TextStyle(fontSize: tamText),
                     ),
-                    FittedBox(
-                      fit: BoxFit.scaleDown,
-                      child: Text(
-                        "Especies, Ubicacion, etc",
-                        style: TextStyle(fontSize: tamText),
-                      ),
-                    ),
-                  ],
-                ),
+                  ),
+                ],
               ),
             ),
           ),

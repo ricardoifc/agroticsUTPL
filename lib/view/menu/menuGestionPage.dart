@@ -65,7 +65,9 @@ class MenuGestionPage extends StatelessWidget {
                 child: RawMaterialButton(
                   onPressed: () {
                     Navigator.of(context).push(MaterialPageRoute(
-                        builder: (BuildContext context) => ListarSiembras(username: username, rol: rol)));
+                        builder: (BuildContext context) => ListarSiembras(
+                            //username: username,
+                            rol: rol)));
                   },
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(15.0),

@@ -21,7 +21,7 @@ dependencies:
   connectivity_plus: ^2.3.9
   rxdart: ^0.27.7
   flutter_bloc: ^8.1.1
-
+  shared_preferences: ^2.0.8
 
 
 

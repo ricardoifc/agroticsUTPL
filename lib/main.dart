@@ -34,8 +34,6 @@ class MyApp extends StatelessWidget {
       home: LoginPage(),
       routes: <String,WidgetBuilder>{
         '/login': (BuildContext context)=> LoginPage(),
-        '/register': (BuildContext context)=> RegisterPage(),
-        '/menu': (BuildContext context)=> MenuPage(username: username,rol: nivel,),
         //'/usuarios/listar': (BuildContext context)=> ListarUsuario(""),
 
       },

@@ -17,8 +17,10 @@ import 'package:path_provider/path_provider.dart';
 class DetalleSiembras extends StatefulWidget {
   List list;
   int index;
-  String username;
-  DetalleSiembras({required this.index, required this.list, required this.username});
+  //String username;
+  DetalleSiembras({required this.index, required this.list,
+    //required this.username
+  });
   @override
   _DetalleSiembrasState createState() => _DetalleSiembrasState();
 }
@@ -79,7 +81,7 @@ class _DetalleSiembrasState extends State<DetalleSiembras> {
           // child: Center(
           child: Column(
             children: <Widget>[
-              Text(username),
+              //Text(username),
               Text(
                 widget.list[widget.index]['info'],
                 style: const TextStyle(fontSize: 20.0),

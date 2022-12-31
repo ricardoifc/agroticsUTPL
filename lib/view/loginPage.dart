@@ -1,199 +1,287 @@
 import 'dart:convert';
-import 'dart:async';
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
+import 'package:agrotics/view/menu/menuPage.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:shared_preferences/shared_preferences.dart';
+import 'dart:developer';
 
 class LoginPage extends StatefulWidget {
   @override
   _LoginPageState createState() => _LoginPageState();
 }
-String username='';
-String nivel='';
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController usernameController = TextEditingController();
+  TextEditingController passwordController = TextEditingController();
 
-  TextEditingController user = TextEditingController();
-  TextEditingController pass = TextEditingController();
+  bool isLoggedIn = false;
+  String username = '';
+  String rol = '';
+  bool isLoading = false;
 
-  String msg='';
+  @override
+  void initState() {
+    super.initState();
+    autoLogIn();
+  }
 
-/*  Future<List> _login() async {
-    print('xx');
-    final response = await http.post(Uri.parse(conexion()+"login.php"), body: {
-      "username": user.text,
-      "password": pass.text,
-    }
-    );
-    print("json xxxxxxx");
-    print(response.toString());
-    var datauserjson = json.decode(response.body);
-    
-    print("imrpimir body response");
-    print(response.body);
+  void autoLogIn() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String userId = prefs.getString('username')!;
+    String userRol = prefs.getString('rol')!;
 
-    if(datauserjson.length==0){
-      showDialog(context: context, builder: (BuildContext context){
-       return  AlertDialog(
-         title: Text("Ocurrió un problema al iniciar sesión, Inténtelo de nuevo."),
-         actions: <Widget>[
-           ElevatedButton(
-             child: Text('Continuar'),
-             onPressed: () {
-        Navigator.pop(context);
-             },
-             style: ElevatedButton.styleFrom(
-               primary: GlobalColor.colorBotonPrincipal
-             ),
-           ),
-         ],
-       );
-      });
-    }else{
-      // print('xx');
-      if(datauserjson[0]['rol']=='docente'){
-        Navigator.pushReplacementNamed(context, '/menu');
-      }else if(datauserjson[0]['rol']=='alumno'){
-        Navigator.pushReplacementNamed(context, '/menu');
-      }else if(datauserjson[0]['rol']=='nuevo'){
-        Navigator.pushReplacementNamed(context, '/menu');
-      }
+    if (userId != null) {
       setState(() {
-        username= datauserjson[0]['username'];
-        nivel = datauserjson[0]['rol'];
+        isLoggedIn = true;
+        username = userId;
+        rol = userRol;
       });
+      return;
     }
-    return datauserjson;
-  }*/
+  }
 
-  void menu(){
-    Navigator.pushReplacementNamed(context, '/menu');
+  Future<Null> logout() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    prefs.remove('username');
+    prefs.remove('rol');
+
     setState(() {
-      username= "docente";
-      nivel = "docente";
+      username = '';
+      isLoggedIn = false;
+    });
+  }
+
+  Future<Null> submitForm() async {
+    setState(() {
+      isLoading = true;
+    });
+
+    final String username = usernameController.text;
+    final String password = passwordController.text;
+
+    if (username.trim().isEmpty || password.trim().isEmpty) {
+      isLoading = false;
+      showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+            title: Text('Error'),
+            content: Text('Por favor, rellene todos los campos'),
+            actions: <Widget>[
+              FlatButton(
+                child: Text('Ok'),
+                onPressed: () {
+                  Navigator.of(context).pop();
+                },
+              ),
+            ],
+          );
+        },
+      );
+
+      return;
+    }
+
+    final http.Response response = await http.post(
+        Uri.parse('https://agrotics.000webhostapp.com/flutter/login.php'),
+        body: {
+          'username': username,
+          'password': password,
+        });
+    if (response.statusCode == 200) {
+      var datauserjson = json.decode(response.body);
+      log(datauserjson.toString());
+      if (datauserjson.length == 0) {
+        showDialog(
+          context: context,
+          builder: (BuildContext context) {
+            return AlertDialog(
+              title: Text('Error'),
+              content: Text('El usuario o contraseña es incorrecto.'),
+              actions: <Widget>[
+                FlatButton(
+                  child: Text('Ok'),
+                  onPressed: () {
+                    Navigator.of(context).pop();
+                  },
+                ),
+              ],
+            );
+          },
+        );
+      } else {
+        var roljson = datauserjson[0]['rol'];
+
+        final SharedPreferences prefs = await SharedPreferences.getInstance();
+        prefs.setString('username', username);
+        prefs.setString('rol', roljson);
+        setState(
+              () {
+            isLoggedIn = true;
+            this.username = username;
+            this.rol = roljson;
+          },
+        );
+      }
+    } else {}
+    setState(() {
+      isLoading = false;
     });
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: GlobalColor.colorBackground,
-      appBar: AppBar(title: const Text("Bienvenido"),),
-        body: Padding(
-            padding: EdgeInsets.all(10),
-            child: ListView(
-              children: <Widget>[
-                Container(
-                    alignment: Alignment.center,
-                    padding: const EdgeInsets.all(10),
-                    child: const Text(
-                      'AGROTICS',
-                      style: TextStyle(
-                          color: GlobalColor.colorPrincipal,
-                          fontWeight: FontWeight.w500,
-                          fontSize: 40),
-                    ),
-                ),
-                Container(
-                  alignment: Alignment.center,
-                  padding: const EdgeInsets.all(10),
-                  child: const Text(
-                    '¡Bienvenido a la aplicación de Agrotics! Esperamos que disfrutes de todas las funcionalidades y herramientas que ofrecemos para ayudarte a capturar, almacenar y gestionar tus datos de muestras de manera eficiente y precisa.',
-                    style: TextStyle(
-                        color: GlobalColor.colorTextPrincipal,
-                        fontWeight: FontWeight.w500,
-                        fontSize: 15),
-                  ),
-                ),
+      backgroundColor: GlobalColor.colorBackground,
+      appBar: AppBar(
+        title:
+        !isLoggedIn ? Text('Inicie sesión') : Text('Bienvenido $username'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Container(
+              alignment: Alignment.center,
+              padding: const EdgeInsets.all(1),
+              child: const Text(
+                'AGROTICS',
+                style: TextStyle(
+                    color: GlobalColor.colorPrincipal,
+                    fontWeight: FontWeight.w500,
+                    fontSize: 40),
+              ),
+            ),
 
-                Container(
-                  height: 50,
-                  padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                  child: RaisedButton(
-                    textColor: GlobalColor.colorBotonTextPrincipal,
-                    color: GlobalColor.colorBotonPrincipal,
-                    child: const Text('Ingresa al menú'),
-                    onPressed: () {
-                      menu();
-                    },
-                  ),
-                ),
-                /*Container(
-                    alignment: Alignment.center,
-                    //padding: const EdgeInsets.all(10),
-                    child: const Text(
-                      'Ingresa tus datos aquí',
-                      style: TextStyle(
+            !isLoggedIn
+                ? Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    //alignment: Alignment.center,
+                    // padding: const EdgeInsets.all(10),
+                    child: Text(
+                      '¡Bienvenido  a la aplicación de Agrotics! Para ayudarte a capturar, almacenar y gestionar tus datos de muestras de manera eficiente y precisa ingresa tu usuario y contraseña para iniciar sesión".',
+                      style: const TextStyle(
                           color: GlobalColor.colorTextPrincipal,
                           fontWeight: FontWeight.w500,
                           fontSize: 15),
                     ),
-                ),
-
-                Container(
-                  padding: EdgeInsets.all(10),
-                  child: TextField(
-                    controller: user,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Usuario',
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  Visibility(
+                    visible: isLoading,
+                    child: Column(
+                      mainAxisSize: MainAxisSize.min,
+                      children: const [
+                        CircularProgressIndicator(),
+                        SizedBox(height: 24),
+                        Text('Iniciando sesión... '),
+                      ],
                     ),
                   ),
-                ),
-                Container(
-                  padding: EdgeInsets.fromLTRB(10, 10, 10, 0),
-                  child: TextField(
-                    obscureText: true,
-                    controller: pass,
-                    decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: 'Contraseña',
-                    ),
-                  ),
-                ),
-                const Padding(
-                  padding: EdgeInsets.all(10.0),
-                ),
-                Container(
-                    height: 50,
-                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                    child: RaisedButton(
-                      textColor: GlobalColor.colorBotonTextPrincipal,
-                      color: GlobalColor.colorBotonPrincipal,
-                      child: Text('Iniciar sesión'),
-                      onPressed: () {
-                        _login();
-                      },
-                    ),
-                ),
-
-                FlatButton(
-                  onPressed: (){
-                    //forgot password screen
-                  },
-                  textColor: GlobalColor.colorSecundario,
-                  child: const Text('Recuperar contraseña'),
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    const Text('¿No tienes cuenta?'),
-                    FlatButton(
-                      textColor: GlobalColor.colorSecundario,
-                      child: const Text(
-                        'Registrate',
-                        style: TextStyle(fontSize: 17),
+                  Visibility(
+                    visible: !isLoading,
+                    child: TextField(
+                      controller: usernameController,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Usuario',
                       ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  Visibility(
+                    visible: !isLoading,
+                    child: TextField(
+                      controller: passwordController,
+                      obscureText: true,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: 'Contraseña',
+                      ),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      //style: style,
+                      onPressed: isLoading ? null : submitForm,
+                      style: ElevatedButton.styleFrom(
+                        primary: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('Iniciar sesión'),
+                    ),
+                  ),
+                ],
+              ),
+            )
+                : Padding(
+              padding: const EdgeInsets.all(20.0),
+              child: Column(
+                children: <Widget>[
+                  Container(
+                    //alignment: Alignment.center,
+                    padding: const EdgeInsets.all(10),
+                    child: Text(
+                      '¡Bienvenido $username a la aplicación de Agrotics! Para ayudarte a capturar, almacenar y gestionar tus datos de muestras de manera eficiente y precisa presiona el boton "Ingresa al menú".',
+                      style: const TextStyle(
+                          color: GlobalColor.colorTextPrincipal,
+                          fontWeight: FontWeight.w500,
+                          fontSize: 15),
+                    ),
+                  ),
+                  Text('Rol: $rol'),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      //style: style,
                       onPressed: () {
-                        Navigator.pushReplacementNamed(context, '/register');
+                        Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (BuildContext context) =>
+                                      MenuPage(username: username, rol: rol)));
                       },
-                    )
-                  ],
-                )*/
-              ],
-            ))
+                      style: ElevatedButton.styleFrom(
+                        primary: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('Ingresa al menú'),
+                    ),
+                  ),
+                  const Padding(
+                    padding: EdgeInsets.all(10.0),
+                  ),
+                  Text('¿Desea cerrar sesión?'),
+
+                  SizedBox(
+                    width: double.infinity,
+                    child: ElevatedButton(
+                      //style: style,
+                      onPressed: logout,
+                      style: ElevatedButton.styleFrom(
+                        primary: GlobalColor.colorBotonCancelar,
+                      ),
+                      child: const Text('Cerrar sesión'),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }

@@ -11,8 +11,12 @@ import 'package:http/http.dart' as http;
 
 
 class ListarSiembras extends StatefulWidget {
+  //var username;
 
-  ListarSiembras({Key? key, required, required String username, required String rol});
+
+  ListarSiembras({Key? key, required,
+  //required this.username,
+  required String rol});
 
   @override
   _ListarSiembrasState createState() => new _ListarSiembrasState();
@@ -71,7 +75,7 @@ class _ListarSiembrasState extends State<ListarSiembras> {
             ),
             ItemList(
               list: snapshot.requireData,
-              username: username,
+              //username: username,
             )
           ])
               : const Center(
@@ -85,9 +89,11 @@ class _ListarSiembrasState extends State<ListarSiembras> {
 
 class ItemList extends StatelessWidget {
   final List list;
-  var username;
+  //var username;
 
-  ItemList({required this.list, required this.username});
+  ItemList({Key? key, required this.list,
+    //required this.username
+  }) : super(key: key);
 
 
   @override
@@ -105,7 +111,7 @@ class ItemList extends StatelessWidget {
                   builder: (BuildContext context) => DetalleSiembras(
                     list: list,
                     index: i,
-                    username: username
+                    //username: username
                   )),
             ),
             child: Card(
