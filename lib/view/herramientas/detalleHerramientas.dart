@@ -1,3 +1,4 @@
+/*
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
 import 'package:agrotics/view/herramientas/editarHerramientas.dart';
@@ -8,7 +9,7 @@ import 'package:http/http.dart' as http;
 class DetalleHerramienta extends StatefulWidget {
   List list;
   int index;
-  DetalleHerramienta({required this.index,required this.list});
+  DetalleHerramienta({Key? key, required this.index,required this.list}) : super(key: key);
   @override
   _DetalleHerramientaState createState() => _DetalleHerramientaState();
 }
@@ -27,20 +28,22 @@ void confirm (){
   AlertDialog alertDialog = AlertDialog(
     content: Text("Esta seguto de eliminar '${widget.list[widget.index]['herramienta']}'"),
     actions: <Widget>[
-      RaisedButton(
-        child: const Text("Si!",style: const TextStyle(color: Colors.black),),
-        color: Colors.red,
-        onPressed: (){
+      ElevatedButton(
+        onPressed: () {
           deleteData();
           Navigator.pop(context);
-          Navigator.pop(context);
-          Navigator.pop(context);
         },
+        style: ElevatedButton.styleFrom(
+          backgroundColor: GlobalColor.colorBotonPrincipal,
+        ),
+        child: const Text('Si!'),
       ),
-      RaisedButton(
-        child: const Text("CANCELAR",style: const TextStyle(color: Colors.black)),
-        color: Colors.green,
+      ElevatedButton(
         onPressed: ()=> Navigator.pop(context),
+        style: ElevatedButton.styleFrom(
+          backgroundColor: GlobalColor.colorBotonPrincipal,
+        ),
+        child: const Text('CANCELAR'),
       ),
     ],
   );
@@ -96,30 +99,24 @@ void confirm (){
                 Row(
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
-                    RaisedButton(
-                      color: GlobalColor.colorBotonPrincipal,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
+                    ElevatedButton(
                       onPressed: ()=>Navigator.of(context).push(
                           MaterialPageRoute(
                             builder: (BuildContext context)=>EditarHerramienta(list: widget.list, index: widget.index,),
                           )
                       ),
-                      child: const Text("EDITAR",style: TextStyle(
-                          color: GlobalColor.colorBotonTextPrincipal
-                      ),),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('EDITAR'),
                     ),
                     const VerticalDivider(),
-                    RaisedButton(
-                      color: Colors.redAccent,
-                      shape: RoundedRectangleBorder(
-                          borderRadius: BorderRadius.circular(30.0)),
-                      onPressed: (
-
-                          )=>confirm(),
-                      child: const Text("ELIMINAR",style: TextStyle(
-                          color: GlobalColor.colorBotonTextPrincipal
-                      ),),
+                    ElevatedButton(
+                      onPressed: ()=>confirm(),
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('ELIMINAR'),
                     ),
                   ],
                 )
@@ -130,4 +127,4 @@ void confirm (){
       ),
     );
   }
-}
+}*/

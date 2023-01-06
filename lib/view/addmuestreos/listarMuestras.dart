@@ -1,3 +1,4 @@
+import 'package:agrotics/util/global_color.dart';
 import 'package:flutter/material.dart';
 import 'package:agrotics/model/database_muestras.dart';
 import 'package:flutter/services.dart';
@@ -28,6 +29,36 @@ class _ListaMuestrasState extends State<ListaMuestras> {
     super.initState();
     _refreshData(); // Loading the data when the app starts
   }
+
+  final alturaFocusNode = FocusNode();
+  final  diametroFocusNode = FocusNode();
+  final nroRacimosFocusNode = FocusNode();
+  final nroFloresRacimosFocusNode = FocusNode();
+  final  nroFloresTotalesFocusNode = FocusNode();
+  final  nroFrutosRacimosFocusNode = FocusNode();
+  final nroFrutosTotalesFocusNode = FocusNode();
+  final longitudFrutoFocusNode = FocusNode();
+  final diametroFrutoFocusNode = FocusNode();
+  final peso_frutoFocusNode = FocusNode();
+  final produccionPlantaFocusNode = FocusNode();
+  final phSueloFocusNode = FocusNode();
+  final  moFocusNode = FocusNode();
+  final nitrogenoFocusNode = FocusNode();
+  final fosforoFocusNode = FocusNode();
+  final potasioFocusNode = FocusNode();
+  final otrosElementosFocusNode = FocusNode();
+  final temperaturaFocusNode = FocusNode();
+  final  humedadRelativaFocusNode = FocusNode();
+  final  riegoLluviaFocusNode = FocusNode();
+  final fertilizaAbonoFocusNode = FocusNode();
+  final cantidadFertilizaFocusNode = FocusNode();
+  final  fechasAplicFertilizaFocusNode = FocusNode();
+  final controlPlagEnfermFocusNode = FocusNode();
+  final cantidadControlPlagFocusNode = FocusNode();
+  final fechaAplicacionFocusNode = FocusNode();
+  final observacionesFocusNode = FocusNode();
+  final botonGuardar = FocusNode();
+
 
   final TextEditingController _id_siembraController = TextEditingController();
   //final TextEditingController _fecha_muestreoController = TextEditingController();
@@ -79,12 +110,20 @@ class _ListaMuestrasState extends State<ListaMuestras> {
   final TextEditingController _usuario_registroController =
       TextEditingController();
 
-  // This function will be triggered when the floating button is pressed
-  // It will also be triggered when you want to update an item
+
+
+  final _formKey1 = GlobalKey<FormState>();
+  final _formKey2 = GlobalKey<FormState>();
+  final _formKey3 = GlobalKey<FormState>();
+  final _formKey4 = GlobalKey<FormState>();
+
+  String despleFertilizantes = "No";
+  String despleControlPlagas = "No";
+
+
   void showMyForm(int? id) async {
     if (id != null) {
-      // id == null -> create new item
-      // id != null -> update an existing item
+
       final existingData = myData.firstWhere((element) => element['id'] == id);
       _id_siembraController.text = existingData['id_siembra'];
       //_fecha_muestreoController.text = existingData['fecha_muestreo'];
@@ -123,9 +162,1253 @@ class _ListaMuestrasState extends State<ListaMuestras> {
 
     showModalBottomSheet(
       context: context,
-      elevation: 5,
-      //isScrollControlled: true,
-      builder: (_) => Container(
+      elevation:5 ,
+      isScrollControlled: true,
+      builder: (_) =>
+          DefaultTabController(
+            length: 4,
+            child: Scaffold(
+              backgroundColor: GlobalColor.colorBackground,
+              appBar: AppBar(
+                title: Text("\nEditar ${_fecha_registroController.text}"),
+                bottom: const TabBar(
+                  tabs: [
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Cultivo",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Suelo",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Climáticos",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                    Tab(
+                      child: Align(
+                        alignment: Alignment.center,
+                        child: Text(
+                          "Otros y Finalizar",
+                          style: TextStyle(fontSize: 12),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              body: TabBarView(
+                children: [
+                  Form(
+                    key: _formKey1,
+                    child: ListView(
+                      children: <Widget>[
+                        Column(children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _alturaController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: alturaFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _alturaController.value = _alturaController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(diametroFocusNode);
+                                    },
+
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Altura',
+                                    ),
+                                  ),
+
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("cm"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _diametroController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: diametroFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _diametroController.value = _diametroController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(nroRacimosFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Díametro',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("cm"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nro_racimosController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: nroRacimosFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(nroFloresRacimosFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Nro de racimos',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("Número"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nro_flores_racimosController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: nroFloresRacimosFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(nroFloresTotalesFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Nro Flores o racimo',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("Número"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nro_frutos_totalesController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: nroFloresTotalesFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(nroFrutosRacimosFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Nro Flores totales planta',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("Número"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nro_frutos_racimosController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: nroFrutosRacimosFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(nroFrutosTotalesFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Nro frutos o racimo',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("Número"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _nro_frutos_totalesController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: nroFrutosTotalesFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(longitudFrutoFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Nro frutos totales planta',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("Número"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+
+                                  child: TextField(
+                                    controller: _longitud_frutoController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: longitudFrutoFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _longitud_frutoController.value = _longitud_frutoController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(diametroFrutoFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Longitud fruto',
+                                    ),
+                                  ),
+                                ),
+
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("cm"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _diametro_frutoController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: diametroFrutoFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _diametro_frutoController.value = _diametro_frutoController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(peso_frutoFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Diametro fruto',
+                                    ),
+                                  ),
+
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("cm"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _peso_frutoController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: peso_frutoFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _peso_frutoController.value = _peso_frutoController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(produccionPlantaFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Peso del fruto',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("g"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _produccion_plantaController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: produccionPlantaFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _produccion_plantaController.value = _produccion_plantaController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(phSueloFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Producción/planta',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("kg"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    key: _formKey2,
+                    child: ListView(
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _ph_sueloController,
+                                      keyboardType: TextInputType.number,
+                                      focusNode: phSueloFocusNode,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                      ],
+                                      onChanged: (text) {
+                                        final value = double.tryParse(text);
+                                        if (value != null) {
+                                          _ph_sueloController.value = _ph_sueloController.value.copyWith(
+                                            text: value.toStringAsFixed(2),
+                                          );
+                                        }
+                                      },
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(moFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'pH del suelo',
+                                      ),
+                                    ),
+
+                                  ),
+
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("pH"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+
+                                    child: TextField(
+                                      controller: _moController,
+                                      keyboardType: TextInputType.number,
+                                      focusNode: moFocusNode,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(r"[0-9,]"),
+                                        )
+                                      ],
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(nitrogenoFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: ' molibdeno',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("%"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _nitrogenoController,
+                                      keyboardType: TextInputType.number,
+                                      focusNode: nitrogenoFocusNode,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(
+                                          RegExp(r"[0-9,]"),
+                                        )
+                                      ],
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(fosforoFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Nitrógeno',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("%"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _fosforoController,
+                                      keyboardType: TextInputType.number,
+                                      focusNode: fosforoFocusNode,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                      ],
+                                      onChanged: (text) {
+                                        final value = double.tryParse(text);
+                                        if (value != null) {
+                                          _fosforoController.value = _fosforoController.value.copyWith(
+                                            text: value.toStringAsFixed(2),
+                                          );
+                                        }
+                                      },
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(potasioFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Fósforo',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("mg/hg"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _potasioController,
+                                      keyboardType: TextInputType.number,
+                                      focusNode: potasioFocusNode,
+                                      inputFormatters: <TextInputFormatter>[
+                                        FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                      ],
+                                      onChanged: (text) {
+                                        final value = double.tryParse(text);
+                                        if (value != null) {
+                                          _potasioController.value = _potasioController.value.copyWith(
+                                            text: value.toStringAsFixed(2),
+                                          );
+                                        }
+                                      },
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(otrosElementosFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Potasio',
+                                      ),
+                                    ),
+
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("Cmol/kg"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _otros_elementosController,
+                                      focusNode: otrosElementosFocusNode,
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(temperaturaFocusNode);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Otros elementos ',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("Texto"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    key: _formKey3,
+                    child: ListView(
+                      children: <Widget>[
+                        Column(children: <Widget>[
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _temperaturaController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: temperaturaFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9,]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(humedadRelativaFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Temperatura',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("°C"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _humedad_relativaController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: humedadRelativaFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(
+                                        RegExp(r"[0-9,]"),
+                                      )
+                                    ],
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(riegoLluviaFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Humedad relativa (%)',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("%"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                          Container(
+                            padding: const EdgeInsets.all(5),
+                            child: Row(
+                              children: [
+                                Flexible(
+                                  child: TextField(
+                                    controller: _riego_lluviaController,
+                                    keyboardType: TextInputType.number,
+                                    focusNode: riegoLluviaFocusNode,
+                                    inputFormatters: <TextInputFormatter>[
+                                      FilteringTextInputFormatter.allow(RegExp(r'\d+(\.\d{0,2})?'))
+                                    ],
+                                    onChanged: (text) {
+                                      final value = double.tryParse(text);
+                                      if (value != null) {
+                                        _riego_lluviaController.value = _riego_lluviaController.value.copyWith(
+                                          text: value.toStringAsFixed(2),
+                                        );
+                                      }
+                                    },
+                                    onSubmitted: (text) {
+                                      FocusScope.of(context).requestFocus(observacionesFocusNode);
+                                    },
+                                    decoration: const InputDecoration(
+                                      border: OutlineInputBorder(),
+                                      labelText: 'Riego/lluvia',
+                                    ),
+                                  ),
+                                ),
+                                const SizedBox(
+                                  width: 90,
+                                  child: Chip(
+                                    labelStyle: TextStyle(color: Colors.white),
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                    label: Text("mL/planta"),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          ),
+                        ]),
+                      ],
+                    ),
+                  ),
+                  Form(
+                    key: _formKey4,
+                    child: ListView(
+                      children: <Widget>[
+                        Column(
+                          children: <Widget>[
+                            Row(children: [
+                              Flexible(
+                                child: ExpansionTile(
+                                  title: Row(
+                                    children: [
+                                      const Text(
+                                          "Uso de Fertilizantes: \t"),
+                                      Text(despleFertilizantes,
+                                          style: const TextStyle(color: Colors.green)),
+                                    ],
+                                  ),
+                                  initiallyExpanded: false,
+                                  onExpansionChanged: (bool value) {
+                                    setState(() {
+                                      if (value) {
+                                        despleFertilizantes = 'Sí';
+                                      } else {
+                                        despleFertilizantes = 'No';
+                                        _fertiliza_abonoController.clear();
+                                        _cantidad_fertilizaController.clear();
+                                        _fechas_aplic_fertilizaController.clear();
+                                      }
+                                    });
+                                  },
+                                  children: [
+                                    Column(
+                                      children: <Widget>[
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _fertiliza_abonoController,
+                                                  focusNode: fertilizaAbonoFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(cantidadFertilizaFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText:
+                                                    'Fertilización/fertilizante/abono',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Texto"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _cantidad_fertilizaController,
+                                                  focusNode: cantidadFertilizaFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(fechasAplicFertilizaFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText: 'Cantidad',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Texto"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _fechas_aplic_fertilizaController,
+                                                  focusNode: fechasAplicFertilizaFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(controlPlagEnfermFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText:
+                                                    'Aplicación de fertilizante',
+                                                  ),
+                                                  readOnly: true,
+                                                  onTap: () async {
+                                                    DateTime? pickedDate =
+                                                    await showDatePicker(
+                                                      context: context,
+                                                      initialDate: DateTime.now(),
+                                                      firstDate: DateTime(2000),
+                                                      lastDate: DateTime(2101),
+                                                    );
+
+                                                    if (pickedDate != null) {
+                                                      String formattedDate =
+                                                      DateFormat('dd/MM/yyyy')
+                                                          .format(pickedDate);
+                                                      _fechas_aplic_fertilizaController.text =
+                                                          formattedDate;
+                                                      if (pickedDate != null) {
+                                                        //print(pickedDate); //pickedDate output format => 2021-03-10 00:00:00.000
+                                                        String formattedDate =
+                                                        DateFormat('dd/MM/yyyy')
+                                                            .format(
+                                                            pickedDate); //formatted date output using intl package =>  2021-03-16
+                                                        //you can implement different kind of Date Format here according to your requirement
+                                                        _fechas_aplic_fertilizaController.text =
+                                                            formattedDate;
+                                                        setState(() {
+                                                          _fechas_aplic_fertilizaController.text =
+                                                              formattedDate; //set output date to TextField value.
+                                                        });
+                                                      } else {
+                                                        //print("Date is not selected");
+                                                      }
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Texto"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                            Row(children: [
+                              Flexible(
+                                child: ExpansionTile(
+                                  title: Row(
+                                    children: [
+                                      const Text(
+                                          "Control de plagas y enfermedades: \t"),
+
+                                      Text(despleControlPlagas,
+                                          style: const TextStyle(color: Colors.green)),
+                                    ],
+                                  ),
+                                  initiallyExpanded: false,
+                                  onExpansionChanged: (bool value) {
+                                    setState(() {
+                                      if (value) {
+                                        despleControlPlagas = 'Sí';
+                                      } else {
+                                        despleControlPlagas = 'No';
+                                        _control_plag_enfermController.clear();
+                                        _cantidad_control_plagController.clear();
+                                        _fecha_aplicacionController.clear();
+                                      }
+                                    });
+                                  },
+                                  children: [
+                                    // Aquí va el código de tus campos de fertilizantes
+                                    Column(
+                                      children: <Widget>[
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _control_plag_enfermController,
+                                                  focusNode: controlPlagEnfermFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(cantidadControlPlagFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText:
+                                                    'Producto: Control de plagas y enfermedades',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Texto"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _cantidad_control_plagController,
+                                                  focusNode: cantidadControlPlagFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(fechaAplicacionFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText: 'Cantidad',
+                                                  ),
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Texto"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                        Container(
+                                          padding: const EdgeInsets.all(5),
+                                          child: Row(
+                                            children: [
+                                              Flexible(
+                                                child: TextField(
+                                                  controller: _fecha_aplicacionController,
+                                                  focusNode: fechaAplicacionFocusNode,
+                                                  onSubmitted: (text) {
+                                                    FocusScope.of(context).requestFocus(observacionesFocusNode);
+                                                  },
+                                                  decoration: const InputDecoration(
+                                                    border: OutlineInputBorder(),
+                                                    labelText: 'Fecha de aplicación ',
+                                                  ),
+                                                  readOnly:
+                                                  true,
+                                                  onTap: () async {
+                                                    DateTime? pickedDate =
+                                                    await showDatePicker(
+                                                        context: context,
+                                                        initialDate:
+                                                        DateTime.now(),
+                                                        firstDate: DateTime(
+                                                            2000),
+                                                        lastDate: DateTime(2101));
+
+                                                    if (pickedDate != null) {
+                                                      String formattedDate =
+                                                      DateFormat('dd-MM-yyyy')
+                                                          .format(pickedDate);
+                                                      //you can implement different kind of Date Format here according to your requirement
+                                                      _fecha_aplicacionController.text =
+                                                          formattedDate;
+
+                                                      setState(() {
+                                                        _fecha_aplicacionController.text =
+                                                            formattedDate; //set output date to TextField value.
+                                                      });
+                                                    } else {
+                                                      //print("Date is not selected");
+                                                    }
+                                                  },
+                                                ),
+                                              ),
+                                              const SizedBox(
+                                                width: 90,
+                                                child: Chip(
+                                                  labelStyle:
+                                                  TextStyle(color: Colors.white),
+                                                  backgroundColor:
+                                                  GlobalColor.colorBotonPrincipal,
+                                                  label: Text("Fecha"),
+                                                ),
+                                              ),
+                                            ],
+                                          ),
+                                        ),
+                                      ],
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            ]),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: Row(
+                                children: [
+                                  Flexible(
+                                    child: TextField(
+                                      controller: _observacionesController,
+                                      focusNode: observacionesFocusNode,
+                                      onSubmitted: (text) {
+                                        FocusScope.of(context).requestFocus(botonGuardar);
+                                      },
+                                      decoration: const InputDecoration(
+                                        border: OutlineInputBorder(),
+                                        labelText: 'Observaciónes ',
+                                      ),
+                                    ),
+                                  ),
+                                  const SizedBox(
+                                    width: 90,
+                                    child: Chip(
+                                      labelStyle: TextStyle(color: Colors.white),
+                                      backgroundColor:
+                                      GlobalColor.colorBotonPrincipal,
+                                      label: Text("Texto"),
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                            Container(
+                              padding: const EdgeInsets.all(5),
+                              child: SizedBox(
+                                width: double.infinity,
+                                child: ElevatedButton(
+                                  //style: style,
+                                  focusNode: botonGuardar,
+                                  onPressed: () async {
+                                    // Save new data
+
+                                    if (id != null) {
+                                      await updateItem(id);
+                                    }
+
+                                    // Clear the text fields
+                                    _id_siembraController.text = '';
+                                    //_fecha_muestreoController.text = '';
+                                    _alturaController.text = '';
+                                    _diametroController.text = '';
+                                    _nro_racimosController.text = '';
+                                    _nro_flores_racimosController.text = '';
+                                    _nro_flores_totalesController.text = '';
+                                    _nro_frutos_racimosController.text = '';
+                                    _nro_frutos_totalesController.text = '';
+                                    _longitud_frutoController.text = '';
+                                    _diametro_frutoController.text = '';
+                                    _peso_frutoController.text = '';
+                                    _produccion_plantaController.text = '';
+                                    _ph_sueloController.text = '';
+                                    _moController.text = '';
+                                    _nitrogenoController.text = '';
+                                    _fosforoController.text = '';
+                                    _potasioController.text = '';
+                                    _otros_elementosController.text = '';
+                                    _temperaturaController.text = '';
+                                    _humedad_relativaController.text = '';
+                                    _riego_lluviaController.text = '';
+                                    _fertiliza_abonoController.text = '';
+                                    _cantidad_fertilizaController.text = '';
+                                    _fechas_aplic_fertilizaController.text = '';
+                                    _control_plag_enfermController.text = '';
+                                    _cantidad_control_plagController.text = '';
+                                    _fecha_aplicacionController.text = '';
+                                    _observacionesController.text = '';
+                                    _fecha_registroController.text = '';
+                                    _usuario_registroController.text = '';
+
+                                    // Close the bottom sheet
+                                    Navigator.of(context).pop();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                                  ),
+                                  child: Text(id == null ? 'x' : 'Hacer Cambios'),
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ],
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          /*Container(
         padding: EdgeInsets.only(
             //top: 15,
             //left: 15,
@@ -729,52 +2012,72 @@ class _ListaMuestrasState extends State<ListaMuestras> {
             child: Text(id == null ? 'Create New' : 'Update'),
           )
         ]),
-      ),
+      ),*/
       //]
       //),
       // ),
     );
   }
 
-// Insert a new data to the database
-  Future<void> addItem() async {
-    await DatabaseHelper.createItem(
-        _id_siembraController.text,
-        //_fecha_muestreoController.text,
-        _alturaController.text,
-        _diametroController.text,
-        _nro_racimosController.text,
-        _nro_flores_racimosController.text,
-        _nro_flores_totalesController.text,
-        _nro_frutos_racimosController.text,
-        _nro_frutos_totalesController.text,
-        _longitud_frutoController.text,
-        _diametro_frutoController.text,
-        _peso_frutoController.text,
-        _produccion_plantaController.text,
-        _ph_sueloController.text,
-        _moController.text,
-        _nitrogenoController.text,
-        _fosforoController.text,
-        _potasioController.text,
-        _otros_elementosController.text,
-        _temperaturaController.text,
-        _humedad_relativaController.text,
-        _riego_lluviaController.text,
-        _fertiliza_abonoController.text,
-        _cantidad_fertilizaController.text,
-        _fechas_aplic_fertilizaController.text,
-        _control_plag_enfermController.text,
-        _cantidad_control_plagController.text,
-        _fecha_aplicacionController.text,
-        _observacionesController.text,
-        _fecha_registroController.text,
-        _usuario_registroController.text);
-    _refreshData();
-  }
 
-  // Update an existing data
   Future<void> updateItem(int id) async {
+    if (_alturaController.text == '0.00') {
+      _alturaController.text = '';
+    }
+    if (_diametroController.text == '0.00') {
+      _diametroController.text = '';
+    }
+    if (_longitud_frutoController.text == '0.00') {
+      _longitud_frutoController.text = '';
+    }
+    if (_diametro_frutoController.text == '0.00') {
+      _diametro_frutoController.text = '';
+    }
+    if (_peso_frutoController.text == '0.00') {
+      _peso_frutoController.text = '';
+    }
+    if (_produccion_plantaController.text == '0.00') {
+      _produccion_plantaController.text = '';
+    }
+    if (_ph_sueloController.text == '0.00') {
+      _ph_sueloController.text = '';
+    }
+    if (_fosforoController.text == '0.00') {
+      _fosforoController.text = '';
+    }
+    if (_potasioController.text == '0.00') {
+      _potasioController.text = '';
+    }
+    if (_riego_lluviaController.text == '0.00') {
+      _riego_lluviaController.text = '';
+    }
+    if (_nro_racimosController.text == '0') {
+      _nro_racimosController.text = '';
+    }
+    if (_nro_flores_racimosController.text == '0') {
+      _nro_flores_racimosController.text = '';
+    }
+    if (_nro_flores_totalesController.text == '0') {
+      _nro_flores_totalesController.text = '';
+    }
+    if (_nro_frutos_racimosController.text == '0') {
+      _nro_frutos_racimosController.text = '';
+    }
+    if (_nro_frutos_totalesController.text == '0') {
+      _nro_frutos_totalesController.text = '';
+    }
+    if (_moController.text == '0') {
+      _moController.text = '';
+    }
+    if (_nitrogenoController.text == '0') {
+      _nitrogenoController.text = '';
+    }
+    if (_temperaturaController.text == '0') {
+      _temperaturaController.text = '';
+    }
+    if (_humedad_relativaController.text == '0') {
+      _humedad_relativaController.text = '';
+    }
     await DatabaseHelper.updateItem(
       id,
       _id_siembraController.text,

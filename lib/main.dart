@@ -1,7 +1,5 @@
 import 'package:agrotics/Util/check_internet_connection.dart';
 import 'package:agrotics/view/loginPage.dart';
-import 'package:agrotics/view/menu/menuPage.dart';
-import 'package:agrotics/view/registerPage.dart';
 import 'package:flutter/material.dart';
 import 'Util/global_color.dart';
 import 'dart:io';
@@ -31,9 +29,9 @@ class MyApp extends StatelessWidget {
           )
       ),
 
-      home: LoginPage(),
+      home: const LoginPage(),
       routes: <String,WidgetBuilder>{
-        '/login': (BuildContext context)=> LoginPage(),
+        '/login': (BuildContext context)=> const LoginPage(),
         //'/usuarios/listar': (BuildContext context)=> ListarUsuario(""),
 
       },

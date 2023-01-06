@@ -1,3 +1,5 @@
+
+/*
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
 import 'package:agrotics/view/herramienta_logs/listarHerramienta_logs.dart';
@@ -111,10 +113,7 @@ class _RegistroAddPrestamoState extends State<RegistroAddPrestamo> {
                   Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Agregar'),
+                      child: ElevatedButton(
                         onPressed: () {
                           _register();
                           Navigator.pop(context);
@@ -122,23 +121,27 @@ class _RegistroAddPrestamoState extends State<RegistroAddPrestamo> {
                           Navigator.of(context).push(MaterialPageRoute(
                               builder: (BuildContext context) => ListarHerramientas_logs()));
                         },
-                      )),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: GlobalColor.colorBotonPrincipal,
+                        ),
+                        child: const Text('Agregar'),
+                      ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.all(5.0),
                   ),
                   Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Salir'),
+                      child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
-
-
                         },
-                      )),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: GlobalColor.colorBotonPrincipal,
+                        ),
+                        child: const Text('Salir'),
+                      ),),
                 ],
               ),
             ],
@@ -148,3 +151,4 @@ class _RegistroAddPrestamoState extends State<RegistroAddPrestamo> {
     );
   }
 }
+*/

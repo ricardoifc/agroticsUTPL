@@ -4,6 +4,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
 class RegistroEspecie extends StatefulWidget {
+  const RegistroEspecie({Key? key}) : super(key: key);
+
   @override
   _RegistroEspecieState createState() => _RegistroEspecieState();
 }
@@ -69,8 +71,7 @@ class _RegistroEspecieState extends State<RegistroEspecie> {
   final _formKey = GlobalKey<FormState>();
 
   void _register() {
-    print('addData');
-    var url = Uri.parse(conexion() + "especies/adddataespecie.php");
+    var url = Uri.parse("${conexion()}especies/adddataespecie.php");
 
     http.post(url, body: {
       'nombre': nombre.text,
@@ -150,7 +151,7 @@ class _RegistroEspecieState extends State<RegistroEspecie> {
             children: <Widget>[
               Column(
                 children: <Widget>[
-                  Text("Taxonomia"),
+                  const Text("Taxonomia"),
                   Container(
                     padding: const EdgeInsets.all(10),
                     child: TextField(
@@ -733,32 +734,35 @@ class _RegistroEspecieState extends State<RegistroEspecie> {
                     padding: EdgeInsets.all(10.0),
                   ),
                   Container(
-                      height: 50,
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Agregar'),
-                        onPressed: () {
-                          _register();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                        },
-                      )),
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        _register();
+                        Navigator.of(context).pop();
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('Agregar'),
+                    ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.all(10.0),
                   ),
                   Container(
-                      height: 50,
-                      padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Salir'),
-                        onPressed: () {
-                          Navigator.pop(context);
-                        },
-                      )),
+                    height: 50,
+                    padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pop(context);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: GlobalColor.colorBotonPrincipal,
+                      ),
+                      child: const Text('Salir'),
+                    ),
+                  ),
                 ],
               ),
             ],

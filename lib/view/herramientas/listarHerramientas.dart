@@ -1,3 +1,4 @@
+/*
 import 'dart:async';
 import 'dart:convert';
 import 'package:agrotics/Util/global_color.dart';
@@ -9,7 +10,7 @@ import 'package:http/http.dart' as http;
 
 class ListarHerramientas extends StatefulWidget {
   @override
-  _ListarHerramientasState createState() => new _ListarHerramientasState();
+  _ListarHerramientasState createState() => _ListarHerramientasState();
 }
 
 class _ListarHerramientasState extends State<ListarHerramientas> {
@@ -30,7 +31,6 @@ class _ListarHerramientasState extends State<ListarHerramientas> {
         future: getData(),
 
         builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
           return snapshot.data != null ? Column(children: <Widget>[
             Container(
               padding: const EdgeInsets.all(4.0),
@@ -76,7 +76,7 @@ class _ListarHerramientasState extends State<ListarHerramientas> {
 
 class ItemList extends StatelessWidget {
   final List list;
-  ItemList({required this.list});
+  const ItemList({Key? key, required this.list}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -122,3 +122,4 @@ class ItemList extends StatelessWidget {
     );
   }
 }
+*/

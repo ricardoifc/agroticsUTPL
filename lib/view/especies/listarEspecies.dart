@@ -15,7 +15,7 @@ class ListarEspecie extends StatefulWidget {
 
 class _ListarEspecieState extends State<ListarEspecie> {
   Future<List> getData() async {
-    final response = await http.get(Uri.parse(conexion()+"especies/getdataespecie.php"));
+    final response = await http.get(Uri.parse("${conexion()}especies/getdataespecie.php"));
     return json.decode(response.body);
   }
 
@@ -31,7 +31,6 @@ class _ListarEspecieState extends State<ListarEspecie> {
         future: getData(),
 
         builder: (context, snapshot) {
-          if (snapshot.hasError) print(snapshot.error);
           return snapshot.data != null ? Column(children: <Widget>[
             Container(
               padding: const EdgeInsets.all(4.0),
@@ -77,7 +76,7 @@ class _ListarEspecieState extends State<ListarEspecie> {
 
 class ItemList extends StatelessWidget {
   final List list;
-  ItemList({required this.list});
+  const ItemList({required this.list});
 
   @override
   Widget build(BuildContext context) {

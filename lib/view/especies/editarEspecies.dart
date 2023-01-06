@@ -7,7 +7,7 @@ class EditarEspecie extends StatefulWidget {
   final List list;
   final int index;
 
-  EditarEspecie({required this.list, required this.index});
+  const EditarEspecie({Key? key, required this.list, required this.index}) : super(key: key);
 
   @override
   _EditarEspecieState createState() => _EditarEspecieState();
@@ -72,8 +72,7 @@ class _EditarEspecieState extends State<EditarEspecie> {
 
 
   void editData() {
-    print("editespecies.php");
-    var url = Uri.parse(conexion() + "especies/editdataespecie.php");
+    var url = Uri.parse("${conexion()}especies/editdataespecie.php");
     http.post(url, body: {
       "id": widget.list[widget.index]['id'],
       "nombre": nombre.text,
@@ -811,16 +810,16 @@ class _EditarEspecieState extends State<EditarEspecie> {
                 const Padding(
                   padding: EdgeInsets.all(10.0),
                 ),
-                RaisedButton(
-                  color: Colors.blueAccent,
+                ElevatedButton(
                   onPressed: () {
                     editData();
                     Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
                   },
-                  child: const Text("Guardar"),
-                )
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                  ),
+                  child: const Text('Guardar'),
+                ),
               ],
             ),
           ],

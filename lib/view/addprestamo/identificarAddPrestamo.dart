@@ -1,3 +1,4 @@
+/*
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/view/addprestamo/registroAddPrestamo.dart';
 import 'package:flutter/material.dart';
@@ -31,13 +32,15 @@ class _IdentificarAddPrestamosState extends State<IdentificarAddPrestamos> {
             child: Column(children: <Widget>[
             Expanded(child: Row(
               children: <Widget>[
-                /*Center(
+                */
+/*Center(
                   child: (result != null)
                       ? Text(
                       'Barcode Type: ${describeEnum(result!.format)}   Data: ${result!.code}')
                       : Text('ID de herramienta'),
 
-                ),*/
+                ),*//*
+
               Container(
                 //height: 50,
                   padding: const EdgeInsets.fromLTRB(20, 5, 20, 0),
@@ -60,3 +63,4 @@ class _IdentificarAddPrestamosState extends State<IdentificarAddPrestamos> {
   }
 
 }
+*/

@@ -1,3 +1,4 @@
+/*
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
 import 'package:flutter/material.dart';
@@ -128,16 +129,16 @@ class _EditarHerramientaState extends State<EditarHerramienta> {
                 const Padding(
                   padding: EdgeInsets.all(10.0),
                 ),
-                RaisedButton(
-                  color: Colors.blueAccent,
+                ElevatedButton(
                   onPressed: () {
                     editData();
                     Navigator.pop(context);
-                    Navigator.pop(context);
-                    Navigator.pop(context);
                   },
-                  child: const Text("Guardar"),
-                )
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: GlobalColor.colorBotonPrincipal,
+                  ),
+                  child: const Text('Guardar'),
+                ),
               ],
             ),
           ],
@@ -146,3 +147,4 @@ class _EditarHerramientaState extends State<EditarHerramienta> {
     );
   }
 }
+*/

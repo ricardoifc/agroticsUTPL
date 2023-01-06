@@ -1,6 +1,6 @@
+/*
 import 'package:agrotics/Util/global_color.dart';
 import 'package:agrotics/conexion.dart';
-import 'package:agrotics/view/herramientas/listarHerramientas.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
@@ -27,8 +27,7 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
   final _formKey = GlobalKey<FormState>();
 
   void _register() {
-    print('adddataherramientas');
-    var url = Uri.parse(conexion() + "herramientas/adddataherramientas.php");
+    var url = Uri.parse("${conexion()}herramientas/adddataherramientas.php");
 
     http.post(url, body: {
       'herramienta': herramienta.text,
@@ -120,34 +119,32 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
                   Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Agregar'),
+                      child: ElevatedButton(
                         onPressed: () {
                           _register();
-                          Navigator.pop(context);
-                          Navigator.pop(context);
-                          Navigator.of(context).push(MaterialPageRoute(
-                              builder: (BuildContext context) => ListarHerramientas()));
+                          Navigator.of(context).pop();
                         },
-                      )),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: GlobalColor.colorBotonPrincipal,
+                        ),
+                        child: const Text('Agregar'),
+                      ),
+                  ),
                   const Padding(
                     padding: EdgeInsets.all(5.0),
                   ),
                   Container(
                       height: 50,
                       padding: const EdgeInsets.fromLTRB(10, 0, 10, 0),
-                      child: RaisedButton(
-                        textColor: GlobalColor.colorBotonTextPrincipal,
-                        color: GlobalColor.colorBotonPrincipal,
-                        child: Text('Salir'),
+                      child: ElevatedButton(
                         onPressed: () {
                           Navigator.pop(context);
-
-
                         },
-                      )),
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: GlobalColor.colorBotonPrincipal,
+                        ),
+                        child: const Text('Salir'),
+                      ),),
                 ],
               ),
             ],
@@ -157,3 +154,4 @@ class _RegistroHerramientaState extends State<RegistroHerramienta> {
     );
   }
 }
+*/
