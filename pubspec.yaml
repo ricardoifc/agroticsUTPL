@@ -1,7 +1,7 @@
 name: agrotics
 description: AgroTICs UTPL
 
-version: 1.0.0+1
+version: 0.0.1
 
 environment:
   sdk: ">=2.12.0 <3.0.0"
@@ -22,6 +22,7 @@ dependencies:
   rxdart: ^0.27.7
   flutter_bloc: ^8.1.1
   shared_preferences: ^2.0.8
+  package_info_plus: ^3.0.2
 
 
 
